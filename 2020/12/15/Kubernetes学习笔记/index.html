@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源  2）服务的无缝迁移3）K8s用容器技术管理项目和服务 2.服务部署模式的变迁1）如何变迁的物理机部署-&gt;虚拟机-&gt;容器化部署2）服务部署模式变化带来的问题需要自动化部署虚拟机服务部署方式（openstack）容器部署方式（k8s） 面临的问题对服务横向扩">
+  <meta name="description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源  2）服务的无缝迁移3）K8s用容器技术管理项目和服务 2.服务部署模式的变迁1）如何变迁的物理机部署-&gt;虚拟机-&gt;容器化部署2）服务部署模式变化带来的问题需要自动化部署虚拟机服务部署方式（openstack）容器部署方式（k8s） 面临的问题对服务横向扩">
+<meta property="og:description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png">
 <meta property="article:published_time" content="2020-12-15T14:10:22.483Z">
-<meta property="article:modified_time" content="2020-12-15T15:15:19.074Z">
+<meta property="article:modified_time" content="2020-12-15T15:29:17.904Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
@@ -180,6 +180,8 @@
         <h1 id="Kubernetes（k8s）"><a href="#Kubernetes（k8s）" class="headerlink" title="Kubernetes（k8s）"></a>Kubernetes（k8s）</h1><p>[toc]</p>
 <h2 id="一-认识k8s架构和应用场景"><a href="#一-认识k8s架构和应用场景" class="headerlink" title="一.认识k8s架构和应用场景"></a>一.认识k8s架构和应用场景</h2><h3 id="1-k8s在企业中的场景"><a href="#1-k8s在企业中的场景" class="headerlink" title="1.k8s在企业中的场景"></a>1.k8s在企业中的场景</h3><p>1）自动化运维平台<br>充分利用服务器资源</p>
 <p><img src="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png"></p>
+<a id="more"></a>
+
 <p>2）服务的无缝迁移<br>3）K8s用容器技术管理项目和服务</p>
 <h3 id="2-服务部署模式的变迁"><a href="#2-服务部署模式的变迁" class="headerlink" title="2.服务部署模式的变迁"></a>2.服务部署模式的变迁</h3><p>1）如何变迁的<br>物理机部署-&gt;虚拟机-&gt;容器化部署<br>2）服务部署模式变化带来的问题<br>需要自动化部署<br>虚拟机服务部署方式（openstack）<br>容器部署方式（k8s）</p>
 <p>面临的问题<br>对服务横向扩展<br>容器宕机怎么办？数据恢复<br>新版本更新不影响原来的业务<br>如何监控容器<br>容器如何调度和创建<br>数据安全性如何保证<br>解决方案：使用k8s</p>
