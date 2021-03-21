@@ -8,35 +8,27 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
+  <meta name="description" content="4.2 Tacotron及其变体tacotron序列到序列的声学模型tacotron">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="http://yoursite.com/2021/03/20/4.2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
+<meta property="og:description" content="4.2 Tacotron及其变体tacotron序列到序列的声学模型tacotron">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/xwJO8D9dgkA1n6M.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/T1kfHb7pJBOGR6V.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/3ZI7OfhDwjscABy.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/Eb2hKHWtyT1MSsq.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/gkuasYITfXG7Flz.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/A6xOp5RBNZm1rQl.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/KPlcYySN8LzufnD.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/UNYW54qbtMwFmR8.pnghttps://i.loli.net/2020/12/15/1IDknwyuYlrN2Q9.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/2lirUk9qTHbjWN3.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/D1Umt9gkbcfRd5X.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/1DTpadvS5wVGNQy.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png">
-<meta property="article:published_time" content="2020-12-15T14:10:22.483Z">
-<meta property="article:modified_time" content="2020-12-15T15:29:17.904Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.48.36.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.51.35.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.52.37.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.03.07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.08.13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.21.20.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.28.54.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.29.41.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.33.50.png">
+<meta property="article:published_time" content="2021-03-20T06:32:52.122Z">
+<meta property="article:modified_time" content="2021-03-21T03:50:42.042Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.48.36.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -172,57 +164,26 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Kubernetes学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-4.2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Kubernetes（k8s）"><a href="#Kubernetes（k8s）" class="headerlink" title="Kubernetes（k8s）"></a>Kubernetes（k8s）</h1><p>[toc]</p>
-<h2 id="一-认识k8s架构和应用场景"><a href="#一-认识k8s架构和应用场景" class="headerlink" title="一.认识k8s架构和应用场景"></a>一.认识k8s架构和应用场景</h2><h3 id="1-k8s在企业中的场景"><a href="#1-k8s在企业中的场景" class="headerlink" title="1.k8s在企业中的场景"></a>1.k8s在企业中的场景</h3><p>1）自动化运维平台<br>充分利用服务器资源</p>
-<p><img src="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png"></p>
+        <h1 id="4-2-Tacotron及其变体"><a href="#4-2-Tacotron及其变体" class="headerlink" title="4.2 Tacotron及其变体"></a>4.2 Tacotron及其变体</h1><h2 id="tacotron"><a href="#tacotron" class="headerlink" title="tacotron"></a>tacotron</h2><p>序列到序列的声学模型tacotron<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.48.36.png"></p>
 <a id="more"></a>
-
-<p>2）服务的无缝迁移<br>3）K8s用容器技术管理项目和服务</p>
-<h3 id="2-服务部署模式的变迁"><a href="#2-服务部署模式的变迁" class="headerlink" title="2.服务部署模式的变迁"></a>2.服务部署模式的变迁</h3><p>1）如何变迁的<br>物理机部署-&gt;虚拟机-&gt;容器化部署<br>2）服务部署模式变化带来的问题<br>需要自动化部署<br>虚拟机服务部署方式（openstack）<br>容器部署方式（k8s）</p>
-<p>面临的问题<br>对服务横向扩展<br>容器宕机怎么办？数据恢复<br>新版本更新不影响原来的业务<br>如何监控容器<br>容器如何调度和创建<br>数据安全性如何保证<br>解决方案：使用k8s</p>
-<h3 id="3-云架构-amp-云原生"><a href="#3-云架构-amp-云原生" class="headerlink" title="3.云架构&amp;云原生"></a>3.云架构&amp;云原生</h3><p>1)云和k8s的关系<br>云:使用容器创建的一套服务器集群网络<br>K8s:管理云中的容器<br>2）云架构<br>    •    iaas     基础设施级服务<br>    •    pass 平台级服务<br>    •    saas软件级服务<br>    •    serverless 向用户提供云服务器，如阿里云等<br>3）云原生<br>让程序和服务运行在云上<br>特点： 容器化，微服务，CI/CD （可持续交互），DevOps</p>
-<p><img src="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png"></p>
-<h3 id="4-k8s架构原理"><a href="#4-k8s架构原理" class="headerlink" title="4.k8s架构原理"></a>4.k8s架构原理</h3><p>1)kubernetes 是google公司使用go语言开发。源自brog系统<br>2）k8s架构<br>master</p>
-<p><img src="https://i.loli.net/2020/12/15/xwJO8D9dgkA1n6M.png"></p>
-<p>api server: k8s网关<br>scheduler 调度器，把请求资源调度到某个node结点<br>controller 控制器，维护k8s资源对象<br>etcd 存储资源对象</p>
-<p>node</p>
-<p><img src="https://i.loli.net/2020/12/15/T1kfHb7pJBOGR6V.png"></p>
-<p>Docker:容器引擎，基础环境<br>kubelet:每个node结点都有一份，在node结点上的资源操作指令由kubelet来执行，（会从etcd中扫描请求）<br>Kube-proxy:代理服务，做 负载均衡<br>fluentd:  日志收集服务<br>Pod:  k8s管理的最小单元，pod内部是容器，k8s不直接管理容器，而是管理pod</p>
-<p>一个master节点对应多个node节点</p>
-<h2 id="二-深入认识k8s核心组件原理"><a href="#二-深入认识k8s核心组件原理" class="headerlink" title="二.深入认识k8s核心组件原理"></a>二.深入认识k8s核心组件原理</h2><p>k8s核心组件原理（资源对象）—ReplicaSet\replicationController<br>Deployment<br>StatefullSet</p>
-<h3 id="1-pod"><a href="#1-pod" class="headerlink" title="1.pod"></a>1.pod</h3><p><img src="https://i.loli.net/2020/12/15/3ZI7OfhDwjscABy.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/Eb2hKHWtyT1MSsq.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/gkuasYITfXG7Flz.png"></p>
-<p>实现服务集群：只需要复制多方pod的副本即可。k8s如果继续扩容，缩容，只需要控制pod的数量即可。</p>
-<p><img src="https://i.loli.net/2020/12/15/A6xOp5RBNZm1rQl.png"></p>
-<p>因为pause容器，同一个pod中，不同容器间访问更加容易，只需要用localhost方法，而不需用ip,port等远程访问</p>
-<h3 id="2-ReplicaSet副本控制器"><a href="#2-ReplicaSet副本控制器" class="headerlink" title="2.ReplicaSet副本控制器"></a>2.ReplicaSet副本控制器</h3><p>replicationController副本控制器<br>控制pod副本的数量，与预期设定的数量保持一致，当一个pod宕机，副本控制器会立即创建一个新pod,使pod数目恒定</p>
-<p><img src="https://i.loli.net/2020/12/15/KPlcYySN8LzufnD.png"></p>
-<pre><code>    使用RS而不再使用RC</code></pre>
-<h3 id="3-Deployment-部署对象"><a href="#3-Deployment-部署对象" class="headerlink" title="3.Deployment 部署对象"></a>3.Deployment 部署对象</h3><p>服务部署结构模型</p>
-<p><img src="https://i.loli.net/2020/12/15/UNYW54qbtMwFmR8.pnghttps://i.loli.net/2020/12/15/1IDknwyuYlrN2Q9.png"></p>
-<p>滚动更新</p>
-<h3 id="4-StatefulSet———解决有状态服务使用容器化部署的问题"><a href="#4-StatefulSet———解决有状态服务使用容器化部署的问题" class="headerlink" title="4.StatefulSet———解决有状态服务使用容器化部署的问题"></a>4.StatefulSet———解决有状态服务使用容器化部署的问题</h3><p>（像mysql这样的有状态服务不宜用deployment进行部署,deployment通常被用来部署无状态服务）因此，k8s使用StatefulSet进行有状态服务</p>
-<p>部署模型</p>
-<p><img src="https://i.loli.net/2020/12/15/2lirUk9qTHbjWN3.png"></p>
-<p>有状态服务</p>
-<h2 id="三-k8s服务的注册与发现，负载均衡"><a href="#三-k8s服务的注册与发现，负载均衡" class="headerlink" title="三.k8s服务的注册与发现，负载均衡"></a>三.k8s服务的注册与发现，负载均衡</h2><p>Service:如何在pod中实现负载均衡<br>Service VIP    (visual IP    虚拟IP地址)</p>
-<h3 id="1-pod如何对外网提供服务，内部是如何访问pod的"><a href="#1-pod如何对外网提供服务，内部是如何访问pod的" class="headerlink" title="1.pod如何对外网提供服务，内部是如何访问pod的"></a>1.pod如何对外网提供服务，内部是如何访问pod的</h3><p><img src="https://i.loli.net/2020/12/15/D1Umt9gkbcfRd5X.png"></p>
-<p>一个pod中不同容器之间通过localhost即可访问</p>
-<h3 id="2-pod如何实现负载均衡"><a href="#2-pod如何实现负载均衡" class="headerlink" title="2.pod如何实现负载均衡"></a>2.pod如何实现负载均衡</h3><p>pod是一个进程，是有生命周期的（宕机，版本更新），都会创建新的pod,（ip地址变化，hostname变化）,因此，nginx做负载不太合适</p>
-<p><img src="https://i.loli.net/2020/12/15/1DTpadvS5wVGNQy.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
-<p>service VIP更深入原理探讨</p>
-<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png"></p>
-<p>Service 如何与pod关联？    用 标签选择器<br>如果pod宕机，service如何发现pod已经变化</p>
-<p><img src="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png"></p>
-
+<h2 id="编码器-CBHG"><a href="#编码器-CBHG" class="headerlink" title="编码器 CBHG"></a>编码器 CBHG</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.51.35.png"></p>
+<h3 id="有关其中一些层的说明"><a href="#有关其中一些层的说明" class="headerlink" title="有关其中一些层的说明"></a>有关其中一些层的说明</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%882.52.37.png"></p>
+<p>Highway Network反向传播时不需要进行非线性变换，使得网络收敛性能好，与ResNet有异曲同工之妙</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.03.07.png"></p>
+<p>CBHG后处理：建模输出信息的上下文依赖，生成线性谱，最后通过声码器得到最后的语音信号</p>
+<h2 id="实验作业"><a href="#实验作业" class="headerlink" title="实验作业"></a>实验作业</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.08.13.png"></p>
+<h2 id="tacotron优缺点"><a href="#tacotron优缺点" class="headerlink" title="tacotron优缺点"></a>tacotron优缺点</h2><p>优势：<br>1.无需复杂的前端文本分析模块<br>2.无需额外的时长模型<br>3.极大地简化了声学模型构建流程，减少了语音合成任务对领域知识的依赖</p>
+<p>缺点：<br>1.CBHG网络复杂，参数量大<br>2.稳定性差，对长句注意力很难学到，有可能合成不了<br>3….<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.21.20.png"></p>
+<h2 id="tactron的变体"><a href="#tactron的变体" class="headerlink" title="tactron的变体"></a>tactron的变体</h2><h3 id="Tacotron2"><a href="#Tacotron2" class="headerlink" title="Tacotron2"></a>Tacotron2</h3><p>一些相对于Tacotron的改进</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.28.54.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.29.41.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%883.33.50.png"></p>
+<h2 id="章节作业"><a href="#章节作业" class="headerlink" title="章节作业"></a>章节作业</h2>
       
 
       
@@ -301,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/03/20/4.2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,7 +276,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/10/Note2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/20/5.1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -325,8 +286,8 @@
     </a>
   
   
-    <a href="/2020/08/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo博客搭建</div>
+    <a href="/2021/03/20/4.1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   

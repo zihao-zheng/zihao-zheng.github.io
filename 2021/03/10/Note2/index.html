@@ -8,35 +8,56 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
+  <meta name="description" content="Hyperparameter Tuning, Regularization and Optimization[toc] Week1交叉验证集，验证集 (Validation) Bias    偏差    high bias    (unfitting) Variance    方差    high variance    (overfitting) 评价指标Basic Recipe for Mac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="http://yoursite.com/2021/03/10/Note2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Kubernetes（k8s）[toc] 一.认识k8s架构和应用场景1.k8s在企业中的场景1）自动化运维平台充分利用服务器资源">
+<meta property="og:description" content="Hyperparameter Tuning, Regularization and Optimization[toc] Week1交叉验证集，验证集 (Validation) Bias    偏差    high bias    (unfitting) Variance    方差    high variance    (overfitting) 评价指标Basic Recipe for Mac">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/xwJO8D9dgkA1n6M.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/T1kfHb7pJBOGR6V.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/3ZI7OfhDwjscABy.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/Eb2hKHWtyT1MSsq.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/gkuasYITfXG7Flz.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/A6xOp5RBNZm1rQl.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/KPlcYySN8LzufnD.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/UNYW54qbtMwFmR8.pnghttps://i.loli.net/2020/12/15/1IDknwyuYlrN2Q9.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/2lirUk9qTHbjWN3.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/D1Umt9gkbcfRd5X.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/1DTpadvS5wVGNQy.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png">
-<meta property="article:published_time" content="2020-12-15T14:10:22.483Z">
-<meta property="article:modified_time" content="2020-12-15T15:29:17.904Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.46.30.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.47.23.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.55.22.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.01.01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.23.19.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.41.17.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.47.05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.19.54.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.17.15.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.29.12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%889.02.21.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.23.42.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%8810.25.04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.34.03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.38.24.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.41.41.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.50.00.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.52.57.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8A%E5%8D%8812.00.52.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.52.00.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.57.44.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.14.36.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.26.14.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.50.58.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.57.38.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%882.05.19.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.44.24.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.49.59.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.59.21.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%885.01.40.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8810.34.06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.12.07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.15.46.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.25.50.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.31.41.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.43.49.png">
+<meta property="article:published_time" content="2021-03-10T14:28:43.183Z">
+<meta property="article:modified_time" content="2021-03-21T04:05:17.392Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.46.30.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -172,57 +193,93 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Kubernetes学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Note2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Kubernetes（k8s）"><a href="#Kubernetes（k8s）" class="headerlink" title="Kubernetes（k8s）"></a>Kubernetes（k8s）</h1><p>[toc]</p>
-<h2 id="一-认识k8s架构和应用场景"><a href="#一-认识k8s架构和应用场景" class="headerlink" title="一.认识k8s架构和应用场景"></a>一.认识k8s架构和应用场景</h2><h3 id="1-k8s在企业中的场景"><a href="#1-k8s在企业中的场景" class="headerlink" title="1.k8s在企业中的场景"></a>1.k8s在企业中的场景</h3><p>1）自动化运维平台<br>充分利用服务器资源</p>
-<p><img src="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png"></p>
+        <p>Hyperparameter Tuning, Regularization and Optimization<br>[toc]</p>
+<h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><p>交叉验证集，验证集 (Validation)</p>
+<p>Bias    偏差    high bias    (unfitting)</p>
+<p>Variance    方差    high variance    (overfitting)</p>
+<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><p>Basic Recipe for Machine Learning</p>
+<p>high bias:    1.bigger network -&gt;几乎只减小bias而不影响variance<br>high variance:        1.more data -&gt;几乎只减小variance而不影响bias<br>                             2.Regularization正则化-&gt;通常对过拟合问题有帮助</p>
 <a id="more"></a>
-
-<p>2）服务的无缝迁移<br>3）K8s用容器技术管理项目和服务</p>
-<h3 id="2-服务部署模式的变迁"><a href="#2-服务部署模式的变迁" class="headerlink" title="2.服务部署模式的变迁"></a>2.服务部署模式的变迁</h3><p>1）如何变迁的<br>物理机部署-&gt;虚拟机-&gt;容器化部署<br>2）服务部署模式变化带来的问题<br>需要自动化部署<br>虚拟机服务部署方式（openstack）<br>容器部署方式（k8s）</p>
-<p>面临的问题<br>对服务横向扩展<br>容器宕机怎么办？数据恢复<br>新版本更新不影响原来的业务<br>如何监控容器<br>容器如何调度和创建<br>数据安全性如何保证<br>解决方案：使用k8s</p>
-<h3 id="3-云架构-amp-云原生"><a href="#3-云架构-amp-云原生" class="headerlink" title="3.云架构&amp;云原生"></a>3.云架构&amp;云原生</h3><p>1)云和k8s的关系<br>云:使用容器创建的一套服务器集群网络<br>K8s:管理云中的容器<br>2）云架构<br>    •    iaas     基础设施级服务<br>    •    pass 平台级服务<br>    •    saas软件级服务<br>    •    serverless 向用户提供云服务器，如阿里云等<br>3）云原生<br>让程序和服务运行在云上<br>特点： 容器化，微服务，CI/CD （可持续交互），DevOps</p>
-<p><img src="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png"></p>
-<h3 id="4-k8s架构原理"><a href="#4-k8s架构原理" class="headerlink" title="4.k8s架构原理"></a>4.k8s架构原理</h3><p>1)kubernetes 是google公司使用go语言开发。源自brog系统<br>2）k8s架构<br>master</p>
-<p><img src="https://i.loli.net/2020/12/15/xwJO8D9dgkA1n6M.png"></p>
-<p>api server: k8s网关<br>scheduler 调度器，把请求资源调度到某个node结点<br>controller 控制器，维护k8s资源对象<br>etcd 存储资源对象</p>
-<p>node</p>
-<p><img src="https://i.loli.net/2020/12/15/T1kfHb7pJBOGR6V.png"></p>
-<p>Docker:容器引擎，基础环境<br>kubelet:每个node结点都有一份，在node结点上的资源操作指令由kubelet来执行，（会从etcd中扫描请求）<br>Kube-proxy:代理服务，做 负载均衡<br>fluentd:  日志收集服务<br>Pod:  k8s管理的最小单元，pod内部是容器，k8s不直接管理容器，而是管理pod</p>
-<p>一个master节点对应多个node节点</p>
-<h2 id="二-深入认识k8s核心组件原理"><a href="#二-深入认识k8s核心组件原理" class="headerlink" title="二.深入认识k8s核心组件原理"></a>二.深入认识k8s核心组件原理</h2><p>k8s核心组件原理（资源对象）—ReplicaSet\replicationController<br>Deployment<br>StatefullSet</p>
-<h3 id="1-pod"><a href="#1-pod" class="headerlink" title="1.pod"></a>1.pod</h3><p><img src="https://i.loli.net/2020/12/15/3ZI7OfhDwjscABy.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/Eb2hKHWtyT1MSsq.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/gkuasYITfXG7Flz.png"></p>
-<p>实现服务集群：只需要复制多方pod的副本即可。k8s如果继续扩容，缩容，只需要控制pod的数量即可。</p>
-<p><img src="https://i.loli.net/2020/12/15/A6xOp5RBNZm1rQl.png"></p>
-<p>因为pause容器，同一个pod中，不同容器间访问更加容易，只需要用localhost方法，而不需用ip,port等远程访问</p>
-<h3 id="2-ReplicaSet副本控制器"><a href="#2-ReplicaSet副本控制器" class="headerlink" title="2.ReplicaSet副本控制器"></a>2.ReplicaSet副本控制器</h3><p>replicationController副本控制器<br>控制pod副本的数量，与预期设定的数量保持一致，当一个pod宕机，副本控制器会立即创建一个新pod,使pod数目恒定</p>
-<p><img src="https://i.loli.net/2020/12/15/KPlcYySN8LzufnD.png"></p>
-<pre><code>    使用RS而不再使用RC</code></pre>
-<h3 id="3-Deployment-部署对象"><a href="#3-Deployment-部署对象" class="headerlink" title="3.Deployment 部署对象"></a>3.Deployment 部署对象</h3><p>服务部署结构模型</p>
-<p><img src="https://i.loli.net/2020/12/15/UNYW54qbtMwFmR8.pnghttps://i.loli.net/2020/12/15/1IDknwyuYlrN2Q9.png"></p>
-<p>滚动更新</p>
-<h3 id="4-StatefulSet———解决有状态服务使用容器化部署的问题"><a href="#4-StatefulSet———解决有状态服务使用容器化部署的问题" class="headerlink" title="4.StatefulSet———解决有状态服务使用容器化部署的问题"></a>4.StatefulSet———解决有状态服务使用容器化部署的问题</h3><p>（像mysql这样的有状态服务不宜用deployment进行部署,deployment通常被用来部署无状态服务）因此，k8s使用StatefulSet进行有状态服务</p>
-<p>部署模型</p>
-<p><img src="https://i.loli.net/2020/12/15/2lirUk9qTHbjWN3.png"></p>
-<p>有状态服务</p>
-<h2 id="三-k8s服务的注册与发现，负载均衡"><a href="#三-k8s服务的注册与发现，负载均衡" class="headerlink" title="三.k8s服务的注册与发现，负载均衡"></a>三.k8s服务的注册与发现，负载均衡</h2><p>Service:如何在pod中实现负载均衡<br>Service VIP    (visual IP    虚拟IP地址)</p>
-<h3 id="1-pod如何对外网提供服务，内部是如何访问pod的"><a href="#1-pod如何对外网提供服务，内部是如何访问pod的" class="headerlink" title="1.pod如何对外网提供服务，内部是如何访问pod的"></a>1.pod如何对外网提供服务，内部是如何访问pod的</h3><p><img src="https://i.loli.net/2020/12/15/D1Umt9gkbcfRd5X.png"></p>
-<p>一个pod中不同容器之间通过localhost即可访问</p>
-<h3 id="2-pod如何实现负载均衡"><a href="#2-pod如何实现负载均衡" class="headerlink" title="2.pod如何实现负载均衡"></a>2.pod如何实现负载均衡</h3><p>pod是一个进程，是有生命周期的（宕机，版本更新），都会创建新的pod,（ip地址变化，hostname变化）,因此，nginx做负载不太合适</p>
-<p><img src="https://i.loli.net/2020/12/15/1DTpadvS5wVGNQy.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
-<p>service VIP更深入原理探讨</p>
-<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
-<p><img src="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png"></p>
-<p>Service 如何与pod关联？    用 标签选择器<br>如果pod宕机，service如何发现pod已经变化</p>
-<p><img src="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png"></p>
-
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.46.30.png"></p>
+<h2 id="阅读材料"><a href="#阅读材料" class="headerlink" title="阅读材料"></a>阅读材料</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.47.23.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.55.22.png"></p>
+<p>L2 Regression -&gt; L2正则化比较常用z</p>
+<h2 id="Regularization-正则化"><a href="#Regularization-正则化" class="headerlink" title="Regularization    正则化"></a>Regularization    正则化</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.01.01.png"></p>
+<h2 id="Why-regularization-reduces-overfitting"><a href="#Why-regularization-reduces-overfitting" class="headerlink" title="Why regularization reduces overfitting?"></a>Why regularization reduces overfitting?</h2><p>使迭代函数更有线性函数的特征</p>
+<h2 id="Dropout-Regularization"><a href="#Dropout-Regularization" class="headerlink" title="Dropout Regularization"></a>Dropout Regularization</h2><p>随机失活正则化，丢弃法 dropout</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.23.19.png"></p>
+<h2 id="Understanding-Dropout"><a href="#Understanding-Dropout" class="headerlink" title="Understanding Dropout"></a>Understanding Dropout</h2><h2 id="Other-regularization-methods"><a href="#Other-regularization-methods" class="headerlink" title="Other regularization methods"></a>Other regularization methods</h2><ol>
+<li>data augumentation 一种接近正则化的技术</li>
+<li>Early stopping 提前终止</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.41.17.png"></p>
+<h2 id="阅读材料-1"><a href="#阅读材料-1" class="headerlink" title="阅读材料"></a>阅读材料</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.47.05.png"></p>
+<p>减去平均值并除以标准偏差,而不是除以标准偏差的平方</p>
+<h2 id="Normalizing-inputs"><a href="#Normalizing-inputs" class="headerlink" title="Normalizing inputs"></a>Normalizing inputs</h2><p>对输入进行归一化<br>1.减去均值(将均值归0)    subtract mean<br>2.将方差进行归一化    normalize variance<br>训练集和测试集应使用同样的方式进行归一化</p>
+<h3 id="如何归一化"><a href="#如何归一化" class="headerlink" title="如何归一化"></a>如何归一化</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.19.54.png"><br>Andrew这里讲错了，应该除以一次方，而不是平方</p>
+<h3 id="为何要归一化"><a href="#为何要归一化" class="headerlink" title="为何要归一化"></a>为何要归一化</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.17.15.png"></p>
+<p>归一化可以使损失函数更加便于用梯度下降法求解</p>
+<p>使均值皆为0，方差皆为1</p>
+<h2 id="另一种加速训练的方法-防止Vanishing-Exploding-gradients"><a href="#另一种加速训练的方法-防止Vanishing-Exploding-gradients" class="headerlink" title="另一种加速训练的方法    防止Vanishing / Exploding gradients"></a>另一种加速训练的方法    防止Vanishing / Exploding gradients</h2><h3 id="为什么会出现Vanishing-Exploding-gradients"><a href="#为什么会出现Vanishing-Exploding-gradients" class="headerlink" title="为什么会出现Vanishing/Exploding gradients"></a>为什么会出现Vanishing/Exploding gradients</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.29.12.png"></p>
+<h3 id="Weight-Initialization-for-Deep-Networks-更好，更细致地随机初始化神经网络"><a href="#Weight-Initialization-for-Deep-Networks-更好，更细致地随机初始化神经网络" class="headerlink" title="Weight Initialization for Deep Networks    更好，更细致地随机初始化神经网络"></a>Weight Initialization for Deep Networks    更好，更细致地随机初始化神经网络</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%889.02.21.png"></p>
+<h3 id="Numerical-approximation-of-gradients"><a href="#Numerical-approximation-of-gradients" class="headerlink" title="Numerical approximation of gradients"></a>Numerical approximation of gradients</h3><h3 id="Gradient-checking-梯度检查"><a href="#Gradient-checking-梯度检查" class="headerlink" title="Gradient checking    梯度检查"></a>Gradient checking    梯度检查</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.23.42.png"><br>如果相差在10^(-7)量级，比较合理</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%8810.25.04.png"></p>
+<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><p>一些加速学习速度的方法</p>
+<h2 id="Mini-batch-gradient-descent-小批量梯度下降"><a href="#Mini-batch-gradient-descent-小批量梯度下降" class="headerlink" title="Mini-batch gradient descent    小批量梯度下降"></a>Mini-batch gradient descent    小批量梯度下降</h2><p>对数据集进行划分处理（几乎用于所有情形）</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.34.03.png"></p>
+<p>过一遍数据集：    1 epoch</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.38.24.png"></p>
+<p>处理大型数据集时，这种方法显著提升速度</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.41.41.png"></p>
+<p>如何选择 batch_size 的大小<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.50.00.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.52.57.png"></p>
+<p>一般选择batch_size的大小为2的幂次，这样计算速度会快一些，可能与计算机的存储原理有关，batch_size一般在[64-256]之间</p>
+<h2 id="Exponentially-weighted-averages-指数加权平均"><a href="#Exponentially-weighted-averages-指数加权平均" class="headerlink" title="Exponentially weighted averages 指数加权平均"></a>Exponentially weighted averages 指数加权平均</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8A%E5%8D%8812.00.52.png"></p>
+<h2 id="Bias-correction-in-exponentially-weighted-averages"><a href="#Bias-correction-in-exponentially-weighted-averages" class="headerlink" title="Bias correction in exponentially weighted averages"></a>Bias correction in exponentially weighted averages</h2><p>偏差修正-》更精确地计算平均值</p>
+<p>修正初始值</p>
+<h2 id="Gradient-descent-with-momentum-动量梯度下降法"><a href="#Gradient-descent-with-momentum-动量梯度下降法" class="headerlink" title="Gradient descent with momentum    动量梯度下降法"></a>Gradient descent with momentum    动量梯度下降法</h2><p>几乎总会比标准的梯度下降法更快</p>
+<h3 id="算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重"><a href="#算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重" class="headerlink" title="算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重"></a>算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重</h3><p>计算 dw 和 db 的滑动平均值</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.52.00.png"></p>
+<p>纵向上的分量因为计算平均值几乎抵消，同时横向分量因为计算平均值不断累加<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.57.44.png"></p>
+<h2 id="RMSprop-均方根传递"><a href="#RMSprop-均方根传递" class="headerlink" title="RMSprop    均方根传递"></a>RMSprop    均方根传递</h2><p>也可以加速梯度下降<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.14.36.png"></p>
+<h2 id="Clarification"><a href="#Clarification" class="headerlink" title="Clarification"></a>Clarification</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png"></p>
+<h2 id="Adam-optimization-algorithm"><a href="#Adam-optimization-algorithm" class="headerlink" title="Adam optimization algorithm"></a>Adam optimization algorithm</h2><p>Adam算法的本质：将 RMSProp和动量算法结合起来</p>
+<p>Adam (Adaptive Moment Estimation) 自适应矩估计</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.26.14.png"></p>
+<p>关于参数的一些说明：</p>
+<p>$$<br>\alpha:学习率，需要经常调整 \<br>\beta1:0.9 导数平均值（第一阶的矩）\<br>\beta2:0.999 平方数的指数加权平均 （第二阶的矩）\<br>\epsilon:1 e-8<br>$$</p>
+<h2 id="Learning-rate-decay-学习率衰减"><a href="#Learning-rate-decay-学习率衰减" class="headerlink" title="Learning rate decay    学习率衰减"></a>Learning rate decay    学习率衰减</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.50.58.png"><br>$$<br>\partial=\frac{1}{1+\text { decay_rate } * \text { epoch_num }} \cdot \partial_{0}<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.57.38.png"></p>
+<h2 id="The-problem-of-local-optima-关于陷入局部最优解的问题"><a href="#The-problem-of-local-optima-关于陷入局部最优解的问题" class="headerlink" title="The problem of local optima    关于陷入局部最优解的问题"></a>The problem of local optima    关于陷入局部最优解的问题</h2><p>假设在一个20000维的空间中，如果一个点要满足局部最有，则需要在20000个维度上的偏导都为0，这几乎是不可能的<br>真正的问题：Plateaus 停滞区 -》会降低学习速度<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%882.05.19.png"></p>
+<h1 id="Week3"><a href="#Week3" class="headerlink" title="Week3"></a>Week3</h1><h2 id="Tuning-process"><a href="#Tuning-process" class="headerlink" title="Tuning process"></a>Tuning process</h2><p>怎么样为参数找到合适的设定值<br>缩小取样范围</p>
+<h2 id="Using-an-appropriate-scale-to-pick-hyperparameters"><a href="#Using-an-appropriate-scale-to-pick-hyperparameters" class="headerlink" title="Using an appropriate scale to pick hyperparameters"></a>Using an appropriate scale to pick hyperparameters</h2><p>使用适当的标度选择超参数</p>
+<h2 id="在实践中调整超参数：Pandas-vs-Caviar"><a href="#在实践中调整超参数：Pandas-vs-Caviar" class="headerlink" title="在实践中调整超参数：Pandas vs. Caviar"></a>在实践中调整超参数：Pandas vs. Caviar</h2><h2 id="Normalizing-activations-in-a-network-在网络中归一化参数"><a href="#Normalizing-activations-in-a-network-在网络中归一化参数" class="headerlink" title="Normalizing activations in a network    在网络中归一化参数"></a>Normalizing activations in a network    在网络中归一化参数</h2><p>Batch Normalization 批量归一化<br>batch norm （BN算法）一种 归一化隐藏单元激活函数 用以加速学习的方法</p>
+<p>在激活函数之前还是之后做归一化，在学术界有争议，工程上一般在之前，也就是对 Z 进行初始化</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.44.24.png"></p>
+<h2 id="Fitting-Batch-Norm-into-a-neural-network"><a href="#Fitting-Batch-Norm-into-a-neural-network" class="headerlink" title="Fitting Batch Norm into a neural network"></a>Fitting Batch Norm into a neural network</h2><p>将 Batch Norm 的思想用到神经网络中<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.49.59.png"></p>
+<p>一般在深度学习框架下实现BN只需要一行代码</p>
+<p>通常使用的是 mini-batches</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.59.21.png"><br>$$<br>b[L]相当于不存在，因为会在BN算法中有减去均值的步骤<br>\beta[L]也是一个用来控制最终偏移量影响的参数<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%885.01.40.png"></p>
+<h3 id="为什么BN算法是有效的-Why-does-Batch-Norm-work"><a href="#为什么BN算法是有效的-Why-does-Batch-Norm-work" class="headerlink" title="为什么BN算法是有效的 Why does Batch Norm work?"></a>为什么BN算法是有效的 Why does Batch Norm work?</h3><p>在隐藏层上具有轻微的正则化效果，但是BN算法不是正则化方法。它是归一化方法，只是伴随着正则化特性<br>mini-batch增大-》正则化效果被削弱</p>
+<h2 id="Batch-Norm-at-test-time"><a href="#Batch-Norm-at-test-time" class="headerlink" title="Batch Norm at test time"></a>Batch Norm at test time</h2><p>批标准化<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8810.34.06.png"></p>
+<h2 id="Softmax-Regression-（softmax回归：一种更普遍的逻辑回归方法）"><a href="#Softmax-Regression-（softmax回归：一种更普遍的逻辑回归方法）" class="headerlink" title="Softmax Regression （softmax回归：一种更普遍的逻辑回归方法）"></a>Softmax Regression （softmax回归：一种更普遍的逻辑回归方法）</h2><p>softmax( )    归一化函数，输入的是向量，输出的也是向量（可以理解为激活函数）<br>下图左边是 softmax( ) 的原理，右边是一个具体的例子<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.12.07.png"><br>下面是没有隐藏层的情形<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.15.46.png"></p>
+<p>当存在更多隐藏层时，边界将为非线性</p>
+<h2 id="如何训练一个带有softmax层的神经网络"><a href="#如何训练一个带有softmax层的神经网络" class="headerlink" title="如何训练一个带有softmax层的神经网络"></a>如何训练一个带有softmax层的神经网络</h2><p>Softmax function generalizes logistic regression to C classes    从两类拓展到C类</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.25.50.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.31.41.png"><br>左边是一个样本的Loss,右边是整个训练集的Loss</p>
+<h2 id="Deep-Learning-Frameworks"><a href="#Deep-Learning-Frameworks" class="headerlink" title="Deep Learning Frameworks"></a>Deep Learning Frameworks</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.43.49.png"><br>Pytorch</p>
+<p>选择框架的指标：</p>
+<p>​    易用性</p>
+<p>​    开源程度</p>
+<p>​    计算速度</p>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2>
       
 
       
@@ -301,7 +358,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/03/10/Note2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,7 +372,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/10/Note2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/10/Note1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -325,8 +382,8 @@
     </a>
   
   
-    <a href="/2020/08/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo博客搭建</div>
+    <a href="/2020/12/15/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
