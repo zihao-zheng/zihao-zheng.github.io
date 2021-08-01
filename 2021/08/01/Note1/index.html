@@ -128,7 +128,7 @@
 
 
 
-  <title>Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题 | 博客</title>
+  <title>Neural Networks and Deep Learning | 博客</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/01/Note1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</h1>
+          <h1 class="post-title" itemprop="name headline">Neural Networks and Deep Learning</h1>
         
 
         <div class="post-meta">
@@ -309,7 +309,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-15T12:55:15+08:00">2020-08-15</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-01T13:27:31+08:00">2021-08-01</time>
             
 
             
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:15:12+08:00">2021-08-01</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:14:20+08:00">2021-08-01</time>
             
           </span>
 
@@ -355,23 +355,70 @@
       
 
       
-        <h1 id="Mac-OS下-VMware-Fusion-Linux虚拟机改为静态IP-并解决上网问题"><a href="#Mac-OS下-VMware-Fusion-Linux虚拟机改为静态IP-并解决上网问题" class="headerlink" title="Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题"></a>Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</h1><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>Mac OS：Catalina 10.15版本<br>Linux：CentOS6.8</p>
-<h2 id="Linux虚拟机NAT模式下，配置静态IP"><a href="#Linux虚拟机NAT模式下，配置静态IP" class="headerlink" title="Linux虚拟机NAT模式下，配置静态IP"></a>Linux虚拟机NAT模式下，配置静态IP</h2><a id="more"></a>
-<h3 id="1-首先查看LinuxIP配置文件"><a href="#1-首先查看LinuxIP配置文件" class="headerlink" title="1. 首先查看LinuxIP配置文件"></a>1. 首先查看LinuxIP配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@bogon ~]# vim &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <p>Neural Networks and Deep Learning<br>[toc]</p>
+<h1 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h1><p>deep learning everything</p>
+<h2 id="本课程学习目标"><a href="#本课程学习目标" class="headerlink" title="本课程学习目标"></a>本课程学习目标</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%8812.00.08.png"></p>
+<a id="more"></a>
 
-<p><img src="https://img-blog.csdnimg.cn/20191127170718727.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70"></p>
-<h3 id="2-编辑ifcfg-ens33-配置文件"><a href="#2-编辑ifcfg-ens33-配置文件" class="headerlink" title="2.编辑ifcfg-ens33 配置文件"></a>2.编辑ifcfg-ens33 配置文件</h3><p>其中 BOOTPROTO设为static，ONBOOT设为yes<br>之后添加IPADDR，GATEWAY，NETWASK，DNS属性<br>(IPADDR是指IP地址；NETMASK是指子网掩码；GATEWAY是指网关)</p>
-<ul>
-<li>打开mac的终端，写下面的命令   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        cat &#x2F;Library&#x2F;Preferences&#x2F;VMware\ Fusion&#x2F;vmnet8&#x2F;nat.conf</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line">就会看到如下ip和netmask，这里到ip对应GATEWAY，netmask对应NETMASK</span><br><span class="line"></span><br><span class="line">![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127172417832.jpg)</span><br><span class="line">- mac -&gt;系统偏好设置-&gt;网络 点击高级后 如下图</span><br><span class="line">  ![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127173123949.jpg?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ&#x3D;&#x3D;,size_16,color_FFFFFF,t_70)</span><br><span class="line"></span><br><span class="line">- 必须配置网关</span><br><span class="line">  </span><br><span class="line">  查看网关的方法</span><br></pre></td></tr></table></figure>
-cat /Library/Preferences/VMware\ Fusion/vmnet8/nat.conf<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 修改方法</span><br><span class="line">  </span><br><span class="line">  终端敲入</span><br></pre></td></tr></table></figure>
-vim /etc/sysconfig/network-scripts/ifcfg-ens33<br>//ens33为网卡<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 3.修改后的ifcfg-eth0 文件</span><br><span class="line">![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127173545924.jpg?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ&#x3D;&#x3D;,size_16,color_FFFFFF,t_70)</span><br><span class="line">### 4.保存后重启service network restart</span><br></pre></td></tr></table></figure>
-systemctl restart network.service<br>//或者<br>//service network restart<pre><code>![](https://img-blog.csdnimg.cn/2019112717425120.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70)
-### 5.最后查看是否能上网
-![](https://img-blog.csdnimg.cn/20191127174535690.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70)
-</code></pre>
-</li>
-</ul>
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h2>
+<h2 id="Why-is-Deep-Learning-taking-off"><a href="#Why-is-Deep-Learning-taking-off" class="headerlink" title="Why is Deep Learning taking off?"></a>Why is Deep Learning taking off?</h2><p>1.Data<br>2.Computation<br>3.Algorithms</p>
+<h2 id="structured-and-unstructured-data"><a href="#structured-and-unstructured-data" class="headerlink" title="structured and unstructured data"></a>structured and unstructured data</h2><p>结构化数据，简单来说就是数据库。非结构化数据，包括全文文本、图像、声音、影视、超媒体</p>
+<h2 id="测验"><a href="#测验" class="headerlink" title="测验"></a>测验</h2><p>1.Images for cat recognition is an example of “structured” data because it is represented as a structured array in a computer. True/False?</p>
+<p>False</p>
+<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><h2 id="Binary-Classification-逻辑回归是一个二元分类问题"><a href="#Binary-Classification-逻辑回归是一个二元分类问题" class="headerlink" title="Binary Classification    逻辑回归是一个二元分类问题"></a>Binary Classification    逻辑回归是一个二元分类问题</h2><h3 id="Notation-符号表示"><a href="#Notation-符号表示" class="headerlink" title="Notation    符号表示"></a>Notation    符号表示</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8B%E5%8D%8811.19.33.png"></p>
+<h2 id="Logistic-Regression-逻辑回归"><a href="#Logistic-Regression-逻辑回归" class="headerlink" title="Logistic Regression    逻辑回归"></a>Logistic Regression    逻辑回归</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8B%E5%8D%8811.28.26.png"></p>
+<h2 id="Logistic-Regression-Cost-Function"><a href="#Logistic-Regression-Cost-Function" class="headerlink" title="Logistic Regression Cost Function"></a>Logistic Regression Cost Function</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8B%E5%8D%8811.39.22.png"></p>
+<p>loss function:    L(y^,y)    计算一个训练样本的误差<br>cost function:    J(w,b)    整个训练集的样本的平均误差</p>
+<h2 id="Gradient-Descent-梯度下降法"><a href="#Gradient-Descent-梯度下降法" class="headerlink" title="Gradient Descent    梯度下降法"></a>Gradient Descent    梯度下降法</h2><p>$$<br>\begin{aligned}<br>W: &amp;=w-\lambda \frac{d J(w, b)}{d w} \<br>b: &amp;=b-\lambda \frac{d J(w, b)}{d b}<br>\end{aligned}<br>$$</p>
+<h2 id="Computation-Graph-计算图"><a href="#Computation-Graph-计算图" class="headerlink" title="Computation Graph    计算图"></a>Computation Graph    计算图</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8810.40.45.png"></p>
+<p>Forward:    蓝色箭头</p>
+<p>Backward:    红色箭头</p>
+<h2 id="Derivatives-with-a-Computation-Graph"><a href="#Derivatives-with-a-Computation-Graph" class="headerlink" title="Derivatives with a Computation Graph"></a>Derivatives with a Computation Graph</h2><p>（一个样本的情形）</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8810.49.06.png"><br>约定：代码中    dvar    表示J对变量var的导数</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8810.55.07.png"></p>
+<h3 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8810.58.32.png"></p>
+<p>从后往前逐层计算导数，再更新每个参数，完成一次迭代</p>
+<h2 id="Gradient-Descent-on-m-Examples"><a href="#Gradient-Descent-on-m-Examples" class="headerlink" title="Gradient Descent on m Examples"></a>Gradient Descent on m Examples</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8811.09.09.png"></p>
+<p>为提高运算速度，需进行矢量化以替代 for 循环</p>
+<p>dw1    dw2    db    为累加量，因此没有上标</p>
+<h2 id="向量化前后的对比"><a href="#向量化前后的对比" class="headerlink" title="向量化前后的对比"></a>向量化前后的对比</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8811.41.40.png"></p>
+<h2 id="More-Vectorization-Examples"><a href="#More-Vectorization-Examples" class="headerlink" title="More Vectorization Examples"></a>More Vectorization Examples</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```python</span><br><span class="line">    <span class="comment">#!/usr/bin/env python3</span></span><br><span class="line">    <span class="comment"># v是一个n维列向量</span></span><br><span class="line">        <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    u = np.exp(v)</span><br><span class="line">    u = np.log(v)</span><br><span class="line">    u = np.abs(v)</span><br><span class="line">    u = np.maximum(v,<span class="number">0</span>)</span><br><span class="line">    u = v**<span class="number">2</span></span><br><span class="line">    ``</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8811.54.46.png"><br>1.用向量化的方法去掉了外面的循环</p>
+<p>2.这里的dz指的是    da/dz,不是dL/dz</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8A%E5%8D%8811.57.13.png"></p>
+<h2 id="Vectorizing-Logistic-Regression"><a href="#Vectorizing-Logistic-Regression" class="headerlink" title="Vectorizing Logistic Regression"></a>Vectorizing Logistic Regression</h2><p>向量化实现前向传播</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8812.04.08.png"></p>
+<h2 id="Vectorizing-Logistic-Regression’s-Gradient-Output"><a href="#Vectorizing-Logistic-Regression’s-Gradient-Output" class="headerlink" title="Vectorizing Logistic Regression’s Gradient Output"></a>Vectorizing Logistic Regression’s Gradient Output</h2><p>向量化实现反向传播</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8812.12.00.png"></p>
+<h2 id="最终的向量化效果"><a href="#最终的向量化效果" class="headerlink" title="最终的向量化效果"></a>最终的向量化效果</h2><p>original:<br>$$<br>\begin{array}{l}<br>J=0, \quad d w_{1}=0, \quad d w_{2}=0, \quad d b=0 \<br>\text { for } i=1 \text { to } m: \<br>\qquad \begin{array}{l}<br>z^{(i)}=w^{T} x^{(i)}+b \<br>a^{(i)}=\sigma\left(z^{(i)}\right) \<br>J+=-\left[y^{(i)} \log a^{(i)}+\left(1-y^{(i)}\right) \log \left(1-a^{(i)}\right)\right] \<br>d z^{(i)}=a^{(i)}-y^{(i)} \<br>d w_{1}+=x_{1}^{(i)} d z^{(i)} \<br>d w_{2}+=x_{2}^{(i)} d z^{(i)} \<br>d b+=d z^{(i)}<br>\end{array} \<br>J=J / m, \quad d w_{1}=d w_{1} / m, \quad d w_{2}=d w_{2} / m \<br>d b=d b / m<br>\end{array}<br>$$</p>
+<p>Last</p>
+<p>$$<br>\begin{array}{l}<br>z=w^{\top} X+b \<br>=n p \cdot d o t(w \cdot T, x)+b \<br>A=\sigma(z) \<br>d z=A-Y \<br>d w=\frac{1}{m} X d z^{\top} \<br>d b=\frac{1}{m} n p \cdot \operatorname{sum}(d z) \<br>w:=w-\partial d w \<br>b:=b-\partial d b<br>\end{array}<br>$$</p>
+<h2 id="Broadcasting-in-Python"><a href="#Broadcasting-in-Python" class="headerlink" title="Broadcasting in Python"></a>Broadcasting in Python</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8812.36.07.png"></p>
+<h2 id="测验-1"><a href="#测验-1" class="headerlink" title="测验"></a>测验</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%881.02.08.png"><br>python中✳️表示逐元素乘法</p>
+<h1 id="Week3"><a href="#Week3" class="headerlink" title="Week3"></a>Week3</h1><h2 id="shallow-Neural-Network-浅层神经网络"><a href="#shallow-Neural-Network-浅层神经网络" class="headerlink" title="shallow Neural Network    浅层神经网络"></a>shallow Neural Network    浅层神经网络</h2><h2 id="Computing-a-Neural-Network’s-Output"><a href="#Computing-a-Neural-Network’s-Output" class="headerlink" title="Computing a Neural Network’s Output"></a>Computing a Neural Network’s Output</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%883.52.23.png"></p>
+<p>[ ]中的数字代表第几层，下标表示是这层中的第几个节点</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%883.57.48.png"></p>
+<h2 id="Vectorizing-across-multiple-examples"><a href="#Vectorizing-across-multiple-examples" class="headerlink" title="Vectorizing across multiple examples"></a>Vectorizing across multiple examples</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%884.08.17.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%884.14.56.png"></p>
+<p>横向代表不同的样本，纵向代表不同的特征层</p>
+<h2 id="Explanation-for-Vectorized-Implementation"><a href="#Explanation-for-Vectorized-Implementation" class="headerlink" title="Explanation for Vectorized Implementation"></a>Explanation for Vectorized Implementation</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%884.19.44.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%884.22.08.png"></p>
+<p>激活函数: sigmod,Relu,线性修正单元,leaky Relu</p>
+<h2 id="为什么神经网络需要一些非线性的激活函数"><a href="#为什么神经网络需要一些非线性的激活函数" class="headerlink" title="为什么神经网络需要一些非线性的激活函数"></a>为什么神经网络需要一些非线性的激活函数</h2><p>Why do you need non-linear activation functions?<br>因为线性函数的组合仍是线性函数，如果使用的是线性激活函数，那么大量隐藏层将几乎不起作用</p>
+<h2 id="Gradient-descent-for-Neural-Networks"><a href="#Gradient-descent-for-Neural-Networks" class="headerlink" title="Gradient descent for Neural Networks"></a>Gradient descent for Neural Networks</h2><p>（以一个只有一个隐藏层的网络为例）</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%885.13.08.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%885.04.56.png"></p>
+<p>计算神经网络层数时，不包括输入层，只算中间和输出层</p>
+<h1 id="Week4"><a href="#Week4" class="headerlink" title="Week4"></a>Week4</h1><h2 id="Forward-Propagation-in-a-Deep-Network"><a href="#Forward-Propagation-in-a-Deep-Network" class="headerlink" title="Forward Propagation in a Deep Network"></a>Forward Propagation in a Deep Network</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%889.01.37.png"></p>
+<h2 id="Clarification"><a href="#Clarification" class="headerlink" title="Clarification"></a>Clarification</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%889.10.43.png"></p>
+<h2 id="Getting-your-matrix-dimensions-right-正确识别矩阵维度"><a href="#Getting-your-matrix-dimensions-right-正确识别矩阵维度" class="headerlink" title="Getting your matrix dimensions right    正确识别矩阵维度"></a>Getting your matrix dimensions right    正确识别矩阵维度</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%889.34.50.png"></p>
+<h2 id="Building-blocks-of-deep-neural-networks"><a href="#Building-blocks-of-deep-neural-networks" class="headerlink" title="Building blocks of deep neural networks"></a>Building blocks of deep neural networks</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8810.14.44.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
       
     </div>
     
@@ -397,7 +444,7 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题">http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</a>
+    <a href="http://yoursite.com/2021/08/01/Note1/" title="Neural Networks and Deep Learning">http://yoursite.com/2021/08/01/Note1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -412,7 +459,7 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 技术博客</a>
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
           
         </div>
       
@@ -425,14 +472,18 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2021/08/01/Note2/" rel="next" title="Hyperparameter Tuning, Regularization and Optimization">
+                <i class="fa fa-chevron-left"></i> Hyperparameter Tuning, Regularization and Optimization
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/08/15/Mac-%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACphp/" rel="prev" title="mac php安装freetype">
-                mac php安装freetype <i class="fa fa-chevron-right"></i>
+              <a href="/2021/08/01/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Kubernetes（k8s）">
+                Kubernetes（k8s） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,7 +625,7 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-OS%E4%B8%8B-VMware-Fusion-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%94%B9%E4%B8%BA%E9%9D%99%E6%80%81IP-%E5%B9%B6%E8%A7%A3%E5%86%B3%E4%B8%8A%E7%BD%91%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E8%99%9A%E6%8B%9F%E6%9C%BANAT%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%8C%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="nav-number">1.2.</span> <span class="nav-text">Linux虚拟机NAT模式下，配置静态IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A6%96%E5%85%88%E6%9F%A5%E7%9C%8BLinuxIP%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 首先查看LinuxIP配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BC%96%E8%BE%91ifcfg-ens33-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.编辑ifcfg-ens33 配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number">1.3.</span> <span class="nav-text">大功告成</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Week-1"><span class="nav-number">1.</span> <span class="nav-text">Week 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">本课程学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-is-Deep-Learning-taking-off"><span class="nav-number">1.2.</span> <span class="nav-text">Why is Deep Learning taking off?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#structured-and-unstructured-data"><span class="nav-number">1.3.</span> <span class="nav-text">structured and unstructured data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">测验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week2"><span class="nav-number">2.</span> <span class="nav-text">Week2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Classification-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%85%83%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">Binary Classification    逻辑回归是一个二元分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Notation-%E7%AC%A6%E5%8F%B7%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.1.1.</span> <span class="nav-text">Notation    符号表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Regression-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-number">2.2.</span> <span class="nav-text">Logistic Regression    逻辑回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Regression-Cost-Function"><span class="nav-number">2.3.</span> <span class="nav-text">Logistic Regression Cost Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">Gradient Descent    梯度下降法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computation-Graph-%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="nav-number">2.5.</span> <span class="nav-text">Computation Graph    计算图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Derivatives-with-a-Computation-Graph"><span class="nav-number">2.6.</span> <span class="nav-text">Derivatives with a Computation Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="nav-number">2.6.1.</span> <span class="nav-text">计算图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent-on-m-Examples"><span class="nav-number">2.7.</span> <span class="nav-text">Gradient Descent on m Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96%E5%89%8D%E5%90%8E%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">2.8.</span> <span class="nav-text">向量化前后的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-Vectorization-Examples"><span class="nav-number">2.9.</span> <span class="nav-text">More Vectorization Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vectorizing-Logistic-Regression"><span class="nav-number">2.10.</span> <span class="nav-text">Vectorizing Logistic Regression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vectorizing-Logistic-Regression%E2%80%99s-Gradient-Output"><span class="nav-number">2.11.</span> <span class="nav-text">Vectorizing Logistic Regression’s Gradient Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96%E6%95%88%E6%9E%9C"><span class="nav-number">2.12.</span> <span class="nav-text">最终的向量化效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Broadcasting-in-Python"><span class="nav-number">2.13.</span> <span class="nav-text">Broadcasting in Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E9%AA%8C-1"><span class="nav-number">2.14.</span> <span class="nav-text">测验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week3"><span class="nav-number">3.</span> <span class="nav-text">Week3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shallow-Neural-Network-%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">3.1.</span> <span class="nav-text">shallow Neural Network    浅层神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computing-a-Neural-Network%E2%80%99s-Output"><span class="nav-number">3.2.</span> <span class="nav-text">Computing a Neural Network’s Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vectorizing-across-multiple-examples"><span class="nav-number">3.3.</span> <span class="nav-text">Vectorizing across multiple examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explanation-for-Vectorized-Implementation"><span class="nav-number">3.4.</span> <span class="nav-text">Explanation for Vectorized Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%9C%80%E8%A6%81%E4%B8%80%E4%BA%9B%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">为什么神经网络需要一些非线性的激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-descent-for-Neural-Networks"><span class="nav-number">3.6.</span> <span class="nav-text">Gradient descent for Neural Networks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week4"><span class="nav-number">4.</span> <span class="nav-text">Week4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Forward-Propagation-in-a-Deep-Network"><span class="nav-number">4.1.</span> <span class="nav-text">Forward Propagation in a Deep Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clarification"><span class="nav-number">4.2.</span> <span class="nav-text">Clarification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-your-matrix-dimensions-right-%E6%AD%A3%E7%A1%AE%E8%AF%86%E5%88%AB%E7%9F%A9%E9%98%B5%E7%BB%B4%E5%BA%A6"><span class="nav-number">4.3.</span> <span class="nav-text">Getting your matrix dimensions right    正确识别矩阵维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Building-blocks-of-deep-neural-networks"><span class="nav-number">4.4.</span> <span class="nav-text">Building blocks of deep neural networks</span></a></li></ol></li></ol></div>
             
 
           </div>

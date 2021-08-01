@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.1" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Blogs">
+<meta property="og:type" content="website">
+<meta property="og:title" content="博客">
+<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="Blogs">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Qilin Zhang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '6.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/archives/"/>
+
+
+
+
+
+  <title>Hyperparameter Tuning, Regularization and Optimization | 博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Qilin Zhang</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/01/Note2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hyperparameter Tuning, Regularization and Optimization</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-01T13:27:31+08:00">2021-08-01</time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:14:20+08:00">2021-08-01</time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Hyperparameter Tuning, Regularization and Optimization<br>[toc]</p>
+<h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><p>交叉验证集，验证集 (Validation)</p>
+<p>Bias    偏差    high bias    (unfitting)</p>
+<p>Variance    方差    high variance    (overfitting)</p>
+<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><p>Basic Recipe for Machine Learning</p>
+<p>high bias:    1.bigger network -&gt;几乎只减小bias而不影响variance<br>high variance:        1.more data -&gt;几乎只减小variance而不影响bias<br>                             2.Regularization正则化-&gt;通常对过拟合问题有帮助</p>
+<a id="more"></a>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.46.30.png"></p>
+<h2 id="阅读材料"><a href="#阅读材料" class="headerlink" title="阅读材料"></a>阅读材料</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.47.23.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8810.55.22.png"></p>
+<p>L2 Regression -&gt; L2正则化比较常用z</p>
+<h2 id="Regularization-正则化"><a href="#Regularization-正则化" class="headerlink" title="Regularization    正则化"></a>Regularization    正则化</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.01.01.png"></p>
+<h2 id="Why-regularization-reduces-overfitting"><a href="#Why-regularization-reduces-overfitting" class="headerlink" title="Why regularization reduces overfitting?"></a>Why regularization reduces overfitting?</h2><p>使迭代函数更有线性函数的特征</p>
+<h2 id="Dropout-Regularization"><a href="#Dropout-Regularization" class="headerlink" title="Dropout Regularization"></a>Dropout Regularization</h2><p>随机失活正则化，丢弃法 dropout</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.23.19.png"></p>
+<h2 id="Understanding-Dropout"><a href="#Understanding-Dropout" class="headerlink" title="Understanding Dropout"></a>Understanding Dropout</h2><h2 id="Other-regularization-methods"><a href="#Other-regularization-methods" class="headerlink" title="Other regularization methods"></a>Other regularization methods</h2><ol>
+<li>data augumentation 一种接近正则化的技术</li>
+<li>Early stopping 提前终止</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.41.17.png"></p>
+<h2 id="阅读材料-1"><a href="#阅读材料-1" class="headerlink" title="阅读材料"></a>阅读材料</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-10%20%E4%B8%8B%E5%8D%8811.47.05.png"></p>
+<p>减去平均值并除以标准偏差,而不是除以标准偏差的平方</p>
+<h2 id="Normalizing-inputs"><a href="#Normalizing-inputs" class="headerlink" title="Normalizing inputs"></a>Normalizing inputs</h2><p>对输入进行归一化<br>1.减去均值(将均值归0)    subtract mean<br>2.将方差进行归一化    normalize variance<br>训练集和测试集应使用同样的方式进行归一化</p>
+<h3 id="如何归一化"><a href="#如何归一化" class="headerlink" title="如何归一化"></a>如何归一化</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.19.54.png"><br>Andrew这里讲错了，应该除以一次方，而不是平方</p>
+<h3 id="为何要归一化"><a href="#为何要归一化" class="headerlink" title="为何要归一化"></a>为何要归一化</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.17.15.png"></p>
+<p>归一化可以使损失函数更加便于用梯度下降法求解</p>
+<p>使均值皆为0，方差皆为1</p>
+<h2 id="另一种加速训练的方法-防止Vanishing-Exploding-gradients"><a href="#另一种加速训练的方法-防止Vanishing-Exploding-gradients" class="headerlink" title="另一种加速训练的方法    防止Vanishing / Exploding gradients"></a>另一种加速训练的方法    防止Vanishing / Exploding gradients</h2><h3 id="为什么会出现Vanishing-Exploding-gradients"><a href="#为什么会出现Vanishing-Exploding-gradients" class="headerlink" title="为什么会出现Vanishing/Exploding gradients"></a>为什么会出现Vanishing/Exploding gradients</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%888.29.12.png"></p>
+<h3 id="Weight-Initialization-for-Deep-Networks-更好，更细致地随机初始化神经网络"><a href="#Weight-Initialization-for-Deep-Networks-更好，更细致地随机初始化神经网络" class="headerlink" title="Weight Initialization for Deep Networks    更好，更细致地随机初始化神经网络"></a>Weight Initialization for Deep Networks    更好，更细致地随机初始化神经网络</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%889.02.21.png"></p>
+<h3 id="Numerical-approximation-of-gradients"><a href="#Numerical-approximation-of-gradients" class="headerlink" title="Numerical approximation of gradients"></a>Numerical approximation of gradients</h3><h3 id="Gradient-checking-梯度检查"><a href="#Gradient-checking-梯度检查" class="headerlink" title="Gradient checking    梯度检查"></a>Gradient checking    梯度检查</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.23.42.png"><br>如果相差在10^(-7)量级，比较合理</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-11%20%E4%B8%8A%E5%8D%8810.25.04.png"></p>
+<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><p>一些加速学习速度的方法</p>
+<h2 id="Mini-batch-gradient-descent-小批量梯度下降"><a href="#Mini-batch-gradient-descent-小批量梯度下降" class="headerlink" title="Mini-batch gradient descent    小批量梯度下降"></a>Mini-batch gradient descent    小批量梯度下降</h2><p>对数据集进行划分处理（几乎用于所有情形）</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.34.03.png"></p>
+<p>过一遍数据集：    1 epoch</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.38.24.png"></p>
+<p>处理大型数据集时，这种方法显著提升速度</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.41.41.png"></p>
+<p>如何选择 batch_size 的大小<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.50.00.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-12%20%E4%B8%8B%E5%8D%8811.52.57.png"></p>
+<p>一般选择batch_size的大小为2的幂次，这样计算速度会快一些，可能与计算机的存储原理有关，batch_size一般在[64-256]之间</p>
+<h2 id="Exponentially-weighted-averages-指数加权平均"><a href="#Exponentially-weighted-averages-指数加权平均" class="headerlink" title="Exponentially weighted averages 指数加权平均"></a>Exponentially weighted averages 指数加权平均</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8A%E5%8D%8812.00.52.png"></p>
+<h2 id="Bias-correction-in-exponentially-weighted-averages"><a href="#Bias-correction-in-exponentially-weighted-averages" class="headerlink" title="Bias correction in exponentially weighted averages"></a>Bias correction in exponentially weighted averages</h2><p>偏差修正-》更精确地计算平均值</p>
+<p>修正初始值</p>
+<h2 id="Gradient-descent-with-momentum-动量梯度下降法"><a href="#Gradient-descent-with-momentum-动量梯度下降法" class="headerlink" title="Gradient descent with momentum    动量梯度下降法"></a>Gradient descent with momentum    动量梯度下降法</h2><p>几乎总会比标准的梯度下降法更快</p>
+<h3 id="算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重"><a href="#算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重" class="headerlink" title="算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重"></a>算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重</h3><p>计算 dw 和 db 的滑动平均值</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.52.00.png"></p>
+<p>纵向上的分量因为计算平均值几乎抵消，同时横向分量因为计算平均值不断累加<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8812.57.44.png"></p>
+<h2 id="RMSprop-均方根传递"><a href="#RMSprop-均方根传递" class="headerlink" title="RMSprop    均方根传递"></a>RMSprop    均方根传递</h2><p>也可以加速梯度下降<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.14.36.png"></p>
+<h2 id="Clarification"><a href="#Clarification" class="headerlink" title="Clarification"></a>Clarification</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png"></p>
+<h2 id="Adam-optimization-algorithm"><a href="#Adam-optimization-algorithm" class="headerlink" title="Adam optimization algorithm"></a>Adam optimization algorithm</h2><p>Adam算法的本质：将 RMSProp和动量算法结合起来</p>
+<p>Adam (Adaptive Moment Estimation) 自适应矩估计</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.16.16.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.26.14.png"></p>
+<p>关于参数的一些说明：</p>
+<p>$$<br>\alpha:学习率，需要经常调整 \<br>\beta1:0.9 导数平均值（第一阶的矩）\<br>\beta2:0.999 平方数的指数加权平均 （第二阶的矩）\<br>\epsilon:1 e-8<br>$$</p>
+<h2 id="Learning-rate-decay-学习率衰减"><a href="#Learning-rate-decay-学习率衰减" class="headerlink" title="Learning rate decay    学习率衰减"></a>Learning rate decay    学习率衰减</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.50.58.png"><br>$$<br>\partial=\frac{1}{1+\text { decay_rate } * \text { epoch_num }} \cdot \partial_{0}<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%881.57.38.png"></p>
+<h2 id="The-problem-of-local-optima-关于陷入局部最优解的问题"><a href="#The-problem-of-local-optima-关于陷入局部最优解的问题" class="headerlink" title="The problem of local optima    关于陷入局部最优解的问题"></a>The problem of local optima    关于陷入局部最优解的问题</h2><p>假设在一个20000维的空间中，如果一个点要满足局部最有，则需要在20000个维度上的偏导都为0，这几乎是不可能的<br>真正的问题：Plateaus 停滞区 -》会降低学习速度<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%882.05.19.png"></p>
+<h1 id="Week3"><a href="#Week3" class="headerlink" title="Week3"></a>Week3</h1><h2 id="Tuning-process"><a href="#Tuning-process" class="headerlink" title="Tuning process"></a>Tuning process</h2><p>怎么样为参数找到合适的设定值<br>缩小取样范围</p>
+<h2 id="Using-an-appropriate-scale-to-pick-hyperparameters"><a href="#Using-an-appropriate-scale-to-pick-hyperparameters" class="headerlink" title="Using an appropriate scale to pick hyperparameters"></a>Using an appropriate scale to pick hyperparameters</h2><p>使用适当的标度选择超参数</p>
+<h2 id="在实践中调整超参数：Pandas-vs-Caviar"><a href="#在实践中调整超参数：Pandas-vs-Caviar" class="headerlink" title="在实践中调整超参数：Pandas vs. Caviar"></a>在实践中调整超参数：Pandas vs. Caviar</h2><h2 id="Normalizing-activations-in-a-network-在网络中归一化参数"><a href="#Normalizing-activations-in-a-network-在网络中归一化参数" class="headerlink" title="Normalizing activations in a network    在网络中归一化参数"></a>Normalizing activations in a network    在网络中归一化参数</h2><p>Batch Normalization 批量归一化<br>batch norm （BN算法）一种 归一化隐藏单元激活函数 用以加速学习的方法</p>
+<p>在激活函数之前还是之后做归一化，在学术界有争议，工程上一般在之前，也就是对 Z 进行初始化</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.44.24.png"></p>
+<h2 id="Fitting-Batch-Norm-into-a-neural-network"><a href="#Fitting-Batch-Norm-into-a-neural-network" class="headerlink" title="Fitting Batch Norm into a neural network"></a>Fitting Batch Norm into a neural network</h2><p>将 Batch Norm 的思想用到神经网络中<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.49.59.png"></p>
+<p>一般在深度学习框架下实现BN只需要一行代码</p>
+<p>通常使用的是 mini-batches</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%884.59.21.png"><br>$$<br>b[L]相当于不存在，因为会在BN算法中有减去均值的步骤<br>\beta[L]也是一个用来控制最终偏移量影响的参数<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%885.01.40.png"></p>
+<h3 id="为什么BN算法是有效的-Why-does-Batch-Norm-work"><a href="#为什么BN算法是有效的-Why-does-Batch-Norm-work" class="headerlink" title="为什么BN算法是有效的 Why does Batch Norm work?"></a>为什么BN算法是有效的 Why does Batch Norm work?</h3><p>在隐藏层上具有轻微的正则化效果，但是BN算法不是正则化方法。它是归一化方法，只是伴随着正则化特性<br>mini-batch增大-》正则化效果被削弱</p>
+<h2 id="Batch-Norm-at-test-time"><a href="#Batch-Norm-at-test-time" class="headerlink" title="Batch Norm at test time"></a>Batch Norm at test time</h2><p>批标准化<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8810.34.06.png"></p>
+<h2 id="Softmax-Regression-（softmax回归：一种更普遍的逻辑回归方法）"><a href="#Softmax-Regression-（softmax回归：一种更普遍的逻辑回归方法）" class="headerlink" title="Softmax Regression （softmax回归：一种更普遍的逻辑回归方法）"></a>Softmax Regression （softmax回归：一种更普遍的逻辑回归方法）</h2><p>softmax( )    归一化函数，输入的是向量，输出的也是向量（可以理解为激活函数）<br>下图左边是 softmax( ) 的原理，右边是一个具体的例子<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.12.07.png"><br>下面是没有隐藏层的情形<br><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.15.46.png"></p>
+<p>当存在更多隐藏层时，边界将为非线性</p>
+<h2 id="如何训练一个带有softmax层的神经网络"><a href="#如何训练一个带有softmax层的神经网络" class="headerlink" title="如何训练一个带有softmax层的神经网络"></a>如何训练一个带有softmax层的神经网络</h2><p>Softmax function generalizes logistic regression to C classes    从两类拓展到C类</p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.25.50.png"></p>
+<p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.31.41.png"><br>左边是一个样本的Loss,右边是整个训练集的Loss</p>
+<h2 id="Deep-Learning-Frameworks"><a href="#Deep-Learning-Frameworks" class="headerlink" title="Deep Learning Frameworks"></a>Deep Learning Frameworks</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-13%20%E4%B8%8B%E5%8D%8811.43.49.png"><br>Pytorch</p>
+<p>选择框架的指标：</p>
+<p>​    易用性</p>
+<p>​    开源程度</p>
+<p>​    计算速度</p>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2>
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        
+      
+    </div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Qilin Zhang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2021/08/01/Note2/" title="Hyperparameter Tuning, Regularization and Optimization">http://yoursite.com/2021/08/01/Note2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/01/Note3/" rel="next" title="Structuring Machine Learning Projects">
+                <i class="fa fa-chevron-left"></i> Structuring Machine Learning Projects
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/01/Note1/" rel="prev" title="Neural Networks and Deep Learning">
+                Neural Networks and Deep Learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zihao-zheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Week1"><span class="nav-number">1.</span> <span class="nav-text">Week1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">评价指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E6%9D%90%E6%96%99"><span class="nav-number">1.2.</span> <span class="nav-text">阅读材料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regularization-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">Regularization    正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-regularization-reduces-overfitting"><span class="nav-number">1.4.</span> <span class="nav-text">Why regularization reduces overfitting?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout-Regularization"><span class="nav-number">1.5.</span> <span class="nav-text">Dropout Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Understanding-Dropout"><span class="nav-number">1.6.</span> <span class="nav-text">Understanding Dropout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-regularization-methods"><span class="nav-number">1.7.</span> <span class="nav-text">Other regularization methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E6%9D%90%E6%96%99-1"><span class="nav-number">1.8.</span> <span class="nav-text">阅读材料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normalizing-inputs"><span class="nav-number">1.9.</span> <span class="nav-text">Normalizing inputs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.9.1.</span> <span class="nav-text">如何归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E8%A6%81%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.9.2.</span> <span class="nav-text">为何要归一化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E7%9A%84%E6%96%B9%E6%B3%95-%E9%98%B2%E6%AD%A2Vanishing-Exploding-gradients"><span class="nav-number">1.10.</span> <span class="nav-text">另一种加速训练的方法    防止Vanishing &#x2F; Exploding gradients</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0Vanishing-Exploding-gradients"><span class="nav-number">1.10.1.</span> <span class="nav-text">为什么会出现Vanishing&#x2F;Exploding gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Weight-Initialization-for-Deep-Networks-%E6%9B%B4%E5%A5%BD%EF%BC%8C%E6%9B%B4%E7%BB%86%E8%87%B4%E5%9C%B0%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.10.2.</span> <span class="nav-text">Weight Initialization for Deep Networks    更好，更细致地随机初始化神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numerical-approximation-of-gradients"><span class="nav-number">1.10.3.</span> <span class="nav-text">Numerical approximation of gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient-checking-%E6%A2%AF%E5%BA%A6%E6%A3%80%E6%9F%A5"><span class="nav-number">1.10.4.</span> <span class="nav-text">Gradient checking    梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week2"><span class="nav-number">2.</span> <span class="nav-text">Week2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mini-batch-gradient-descent-%E5%B0%8F%E6%89%B9%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">2.1.</span> <span class="nav-text">Mini-batch gradient descent    小批量梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exponentially-weighted-averages-%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87"><span class="nav-number">2.2.</span> <span class="nav-text">Exponentially weighted averages 指数加权平均</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bias-correction-in-exponentially-weighted-averages"><span class="nav-number">2.3.</span> <span class="nav-text">Bias correction in exponentially weighted averages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-descent-with-momentum-%E5%8A%A8%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">Gradient descent with momentum    动量梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%BB%E8%A6%81%E6%80%9D%E6%83%B3%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E6%A2%AF%E5%BA%A6%E6%9D%A5%E6%9B%B4%E6%96%B0%E6%9D%83%E9%87%8D"><span class="nav-number">2.4.1.</span> <span class="nav-text">算法的主要思想：计算梯度的指数加权平均，然后使用这个梯度来更新权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RMSprop-%E5%9D%87%E6%96%B9%E6%A0%B9%E4%BC%A0%E9%80%92"><span class="nav-number">2.5.</span> <span class="nav-text">RMSprop    均方根传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clarification"><span class="nav-number">2.6.</span> <span class="nav-text">Clarification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam-optimization-algorithm"><span class="nav-number">2.7.</span> <span class="nav-text">Adam optimization algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-rate-decay-%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F"><span class="nav-number">2.8.</span> <span class="nav-text">Learning rate decay    学习率衰减</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-problem-of-local-optima-%E5%85%B3%E4%BA%8E%E9%99%B7%E5%85%A5%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E8%A7%A3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.9.</span> <span class="nav-text">The problem of local optima    关于陷入局部最优解的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week3"><span class="nav-number">3.</span> <span class="nav-text">Week3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuning-process"><span class="nav-number">3.1.</span> <span class="nav-text">Tuning process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-an-appropriate-scale-to-pick-hyperparameters"><span class="nav-number">3.2.</span> <span class="nav-text">Using an appropriate scale to pick hyperparameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%AE%9E%E8%B7%B5%E4%B8%AD%E8%B0%83%E6%95%B4%E8%B6%85%E5%8F%82%E6%95%B0%EF%BC%9APandas-vs-Caviar"><span class="nav-number">3.3.</span> <span class="nav-text">在实践中调整超参数：Pandas vs. Caviar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normalizing-activations-in-a-network-%E5%9C%A8%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%BD%92%E4%B8%80%E5%8C%96%E5%8F%82%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">Normalizing activations in a network    在网络中归一化参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fitting-Batch-Norm-into-a-neural-network"><span class="nav-number">3.5.</span> <span class="nav-text">Fitting Batch Norm into a neural network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88BN%E7%AE%97%E6%B3%95%E6%98%AF%E6%9C%89%E6%95%88%E7%9A%84-Why-does-Batch-Norm-work"><span class="nav-number">3.5.1.</span> <span class="nav-text">为什么BN算法是有效的 Why does Batch Norm work?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Norm-at-test-time"><span class="nav-number">3.6.</span> <span class="nav-text">Batch Norm at test time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax-Regression-%EF%BC%88softmax%E5%9B%9E%E5%BD%92%EF%BC%9A%E4%B8%80%E7%A7%8D%E6%9B%B4%E6%99%AE%E9%81%8D%E7%9A%84%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">Softmax Regression （softmax回归：一种更普遍的逻辑回归方法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AA%E5%B8%A6%E6%9C%89softmax%E5%B1%82%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">3.8.</span> <span class="nav-text">如何训练一个带有softmax层的神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Learning-Frameworks"><span class="nav-number">3.9.</span> <span class="nav-text">Deep Learning Frameworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow"><span class="nav-number">3.10.</span> <span class="nav-text">TensorFlow</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qilin Zhang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.1"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

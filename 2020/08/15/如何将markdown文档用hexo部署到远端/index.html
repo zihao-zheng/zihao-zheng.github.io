@@ -1,35 +1,1103 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.1" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Blogs">
+<meta property="og:type" content="website">
+<meta property="og:title" content="博客">
+<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="Blogs">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Qilin Zhang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '6.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/archives/"/>
+
+
+
+
+
+  <title>如何将markdown文档用hexo部署到远端 | 博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Qilin Zhang</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/%E5%A6%82%E4%BD%95%E5%B0%86markdown%E6%96%87%E6%A1%A3%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何将markdown文档用hexo部署到远端</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-15T13:27:31+08:00">2020-08-15</time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:15:20+08:00">2021-08-01</time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="如何将markdown文档用hexo部署到远端"><a href="#如何将markdown文档用hexo部署到远端" class="headerlink" title="如何将markdown文档用hexo部署到远端"></a>如何将markdown文档用hexo部署到远端</h1><h2 id="1-获取root权限"><a href="#1-获取root权限" class="headerlink" title="1. 获取root权限"></a>1. 获取root权限</h2><p>终端默认打开就进入用户文件夹下，cd到blog文件夹下，然后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+<p>输入mac密码后出现  sh-3.2#</p>
+<h2 id="2-启动hexo-查看目前本地的情况"><a href="#2-启动hexo-查看目前本地的情况" class="headerlink" title="2.启动hexo,查看目前本地的情况"></a>2.启动hexo,查看目前本地的情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>断开server</p>
+<a id="more"></a>
+
+<h2 id="3-创建博文"><a href="#3-创建博文" class="headerlink" title="3.创建博文"></a>3.创建博文</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;Mac 安装新版本php&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="4-进入博文目录进行编辑"><a href="#4-进入博文目录进行编辑" class="headerlink" title="4.进入博文目录进行编辑"></a>4.进入博文目录进行编辑</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd source&#x2F;_posts&#x2F;</span><br><span class="line">ls -l</span><br><span class="line">vim  Mac-安装新版本php.md</span><br></pre></td></tr></table></figure>
+<p>“title”,”date”,”tag”后务必加空格，否则报错</p>
+<p>//图片</p>
+<h2 id="5-使博文在本地生效"><a href="#5-使博文在本地生效" class="headerlink" title="5.使博文在本地生效"></a>5.使博文在本地生效</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ..&#x2F;..        &#x2F;&#x2F;从&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;source&#x2F;_posts退到&#x2F;Users&#x2F;zhangqilin&#x2F;blog</span><br><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s          &#x2F;&#x2F;已在本地生效</span><br></pre></td></tr></table></figure>
+<h2 id="6-将本地文件推到远端"><a href="#6-将本地文件推到远端" class="headerlink" title="6.将本地文件推到远端"></a>6.将本地文件推到远端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d          &#x2F;&#x2F;将本地文件推到远端（需提前Press Ctrl+C to stop.）</span><br></pre></td></tr></table></figure>
+
+<h2 id="终端实录"><a href="#终端实录" class="headerlink" title="终端实录"></a>终端实录</h2><p>(中途有翻车，因为第4步tag后没加空格,回去重新加上空格就好了)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sat Aug 15 09:49:13 on ttys001</span><br><span class="line">zhangqilin@zhangqilindeMacBook-Pro blog % sudo su</span><br><span class="line">Password:</span><br><span class="line">sh-3.2# hexo server</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http:&#x2F;&#x2F;localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">hexo n &quot;Mac 安装新版本php&quot;</span><br><span class="line">hexo s</span><br><span class="line">^CINFO  Farewell</span><br><span class="line">sh-3.2# hexo server</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http:&#x2F;&#x2F;localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">^CINFO  Catch you later</span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# hexo n &quot;Mac 安装新版本php&quot;</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Created: &#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;Mac-安装新版本php.md</span><br><span class="line">sh-3.2# pwd</span><br><span class="line">&#x2F;Users&#x2F;zhangqilin&#x2F;blog</span><br><span class="line">sh-3.2# ls</span><br><span class="line">.deploy_git     node_modules        scaffolds</span><br><span class="line">.gitignore      package-lock.json   source</span><br><span class="line">_config.yml     package.json        themes</span><br><span class="line">db.json         public</span><br><span class="line">sh-3.2# cd &#x2F;source&#x2F;_posts&#x2F;</span><br><span class="line">sh: cd: &#x2F;source&#x2F;_posts&#x2F;: No such file or directory</span><br><span class="line">sh-3.2# cd &#x2F;source&#x2F;_posts</span><br><span class="line">sh: cd: &#x2F;source&#x2F;_posts: No such file or directory</span><br><span class="line">sh-3.2# cd source&#x2F;_posts&#x2F;</span><br><span class="line">sh-3.2# ls -l</span><br><span class="line">total 24</span><br><span class="line">-rw-r--r--  1 root  staff   70  8 15 09:55 Mac-安装新版本php.md</span><br><span class="line">-rw-r--r--  1 root  staff  838  8  4 17:41 hello-world.md</span><br><span class="line">-rw-r--r--  1 root  staff  162  8  4 17:58 我的第一篇博客文章.md</span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# vim  Mac-安装新版本php.md</span><br><span class="line">sh-3.2# code  Mac-安装新版本php.md</span><br><span class="line">sh-3.2# pwd</span><br><span class="line">&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;source&#x2F;_posts</span><br><span class="line">sh-3.2# cd ..&#x2F;..</span><br><span class="line">sh-3.2# hexo clean</span><br><span class="line">INFO  Deleted database.</span><br><span class="line">INFO  Deleted public folder.</span><br><span class="line">sh-3.2# hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">ERROR &#123;</span><br><span class="line">  err: YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</span><br><span class="line">      </span><br><span class="line">      ^</span><br><span class="line">      at generateError (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:167:10)</span><br><span class="line">      at throwError (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:173:9)</span><br><span class="line">      at readBlockMapping (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1073:9)</span><br><span class="line">      at composeNode (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1359:12)</span><br><span class="line">      at readDocument (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1525:3)</span><br><span class="line">      at loadDocuments (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1588:5)</span><br><span class="line">      at Object.load (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1614:19)</span><br><span class="line">      at parseYAML (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo-front-matter&#x2F;lib&#x2F;front_matter.js:69:23)</span><br><span class="line">      at parse (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo-front-matter&#x2F;lib&#x2F;front_matter.js:50:12)</span><br><span class="line">      at &#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo&#x2F;lib&#x2F;plugins&#x2F;processor&#x2F;post.js:51:20</span><br><span class="line">      at tryCatcher (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;util.js:16:23)</span><br><span class="line">      at Promise._settlePromiseFromHandler (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:544:35)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:604:18)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10)</span><br><span class="line">      at Promise._settlePromises (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:729:18)</span><br><span class="line">      at Promise._fulfill (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:673:18)</span><br><span class="line">      at PromiseArray._resolve (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:127:19)</span><br><span class="line">      at PromiseArray._promiseFulfilled (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:145:14)</span><br><span class="line">      at PromiseArray._iterate (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:115:31)</span><br><span class="line">      at PromiseArray.init [as _init] (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:79:10)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:601:21)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10)</span><br><span class="line">      at Promise._settlePromises (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:729:18)</span><br><span class="line">      at Promise._fulfill (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:673:18)</span><br><span class="line">      at PromiseArray._resolve (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:127:19)</span><br><span class="line">      at PromiseArray._promiseFulfilled (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:145:14)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:609:26)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10) &#123;</span><br><span class="line">    reason: &#39;can not read a block mapping entry; a multiline key may not be an implicit key&#39;,</span><br><span class="line">    mark: Mark &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;title: Mac 安装新版本php\ndate: 2020-08-15 09:55:16\ntags:php,freetype\n\u0000&#39;,</span><br><span class="line">      position: 64,</span><br><span class="line">      line: 3,</span><br><span class="line">      column: 0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Process failed: %s _posts&#x2F;Mac-安装新版本php.md</span><br><span class="line">INFO  Files loaded in 127 ms</span><br><span class="line">INFO  Generated: img&#x2F;default-skin.png</span><br><span class="line">INFO  Generated: fonts&#x2F;tooltip.4004ff.svg</span><br><span class="line">INFO  Generated: img&#x2F;scrollbar_arrow.png</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.8c627f.woff</span><br><span class="line">INFO  Generated: fonts&#x2F;default-skin.b257fa.svg</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.16acc2.ttf</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.45d7ee.svg</span><br><span class="line">INFO  Generated: img&#x2F;preloader.gif</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.b322fa.eot</span><br><span class="line">INFO  Generated: archives&#x2F;index.html</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;index.html</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;08&#x2F;index.html</span><br><span class="line">INFO  Generated: index.html</span><br><span class="line">INFO  Generated: main.0cf68a.css</span><br><span class="line">INFO  Generated: slider.e37972.js</span><br><span class="line">INFO  Generated: 2020&#x2F;08&#x2F;04&#x2F;hello-world&#x2F;index.html</span><br><span class="line">INFO  Generated: main.0cf68a.js</span><br><span class="line">INFO  Generated: 2020&#x2F;08&#x2F;04&#x2F;我的第一篇博客文章&#x2F;index.html</span><br><span class="line">INFO  Generated: mobile.992cbe.js</span><br><span class="line">INFO  19 files generated in 33 ms</span><br><span class="line">sh-3.2# hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">ERROR &#123;</span><br><span class="line">  err: YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</span><br><span class="line">      </span><br><span class="line">      ^</span><br><span class="line">      at generateError (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:167:10)</span><br><span class="line">      at throwError (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:173:9)</span><br><span class="line">      at readBlockMapping (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1073:9)</span><br><span class="line">      at composeNode (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1359:12)</span><br><span class="line">      at readDocument (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1525:3)</span><br><span class="line">      at loadDocuments (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1588:5)</span><br><span class="line">      at Object.load (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;js-yaml&#x2F;lib&#x2F;js-yaml&#x2F;loader.js:1614:19)</span><br><span class="line">      at parseYAML (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo-front-matter&#x2F;lib&#x2F;front_matter.js:69:23)</span><br><span class="line">      at parse (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo-front-matter&#x2F;lib&#x2F;front_matter.js:50:12)</span><br><span class="line">      at &#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;hexo&#x2F;lib&#x2F;plugins&#x2F;processor&#x2F;post.js:51:20</span><br><span class="line">      at tryCatcher (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;util.js:16:23)</span><br><span class="line">      at Promise._settlePromiseFromHandler (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:544:35)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:604:18)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10)</span><br><span class="line">      at Promise._settlePromises (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:729:18)</span><br><span class="line">      at Promise._fulfill (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:673:18)</span><br><span class="line">      at PromiseArray._resolve (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:127:19)</span><br><span class="line">      at PromiseArray._promiseFulfilled (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:145:14)</span><br><span class="line">      at PromiseArray._iterate (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:115:31)</span><br><span class="line">      at PromiseArray.init [as _init] (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:79:10)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:601:21)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10)</span><br><span class="line">      at Promise._settlePromises (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:729:18)</span><br><span class="line">      at Promise._fulfill (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:673:18)</span><br><span class="line">      at PromiseArray._resolve (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:127:19)</span><br><span class="line">      at PromiseArray._promiseFulfilled (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise_array.js:145:14)</span><br><span class="line">      at Promise._settlePromise (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:609:26)</span><br><span class="line">      at Promise._settlePromise0 (&#x2F;Users&#x2F;zhangqilin&#x2F;blog&#x2F;node_modules&#x2F;bluebird&#x2F;js&#x2F;release&#x2F;promise.js:649:10) &#123;</span><br><span class="line">    reason: &#39;can not read a block mapping entry; a multiline key may not be an implicit key&#39;,</span><br><span class="line">    mark: Mark &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;title: Mac 安装新版本php\ndate: 2020-08-15 09:55:16\ntags:php,freetype\n\u0000&#39;,</span><br><span class="line">      position: 64,</span><br><span class="line">      line: 3,</span><br><span class="line">      column: 0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Process failed: %s _posts&#x2F;Mac-安装新版本php.md</span><br><span class="line">INFO  Hexo is running at http:&#x2F;&#x2F;localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">^CINFO  Have a nice day</span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# cd &#x2F;source&#x2F;_posts</span><br><span class="line">sh: cd: &#x2F;source&#x2F;_posts: No such file or directory</span><br><span class="line">sh-3.2# pwd</span><br><span class="line">&#x2F;Users&#x2F;zhangqilin&#x2F;blog</span><br><span class="line">sh-3.2# cd source&#x2F;_posts&#x2F;</span><br><span class="line">sh-3.2# ls</span><br><span class="line">Mac-安装新版本php.md     我的第一篇博客文章.md</span><br><span class="line">hello-world.md</span><br><span class="line">sh-3.2# vim Mac-安装新版本php.md</span><br><span class="line">sh-3.2# cd ....</span><br><span class="line">sh: cd: ....: No such file or directory</span><br><span class="line">sh-3.2# cd ..&#x2F;..</span><br><span class="line">sh-3.2# pwd</span><br><span class="line">&#x2F;Users&#x2F;zhangqilin&#x2F;blog</span><br><span class="line">sh-3.2# hexo clean</span><br><span class="line">INFO  Deleted database.</span><br><span class="line">INFO  Deleted public folder.</span><br><span class="line">sh-3.2# hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 124 ms</span><br><span class="line">INFO  Generated: fonts&#x2F;default-skin.b257fa.svg</span><br><span class="line">INFO  Generated: img&#x2F;default-skin.png</span><br><span class="line">INFO  Generated: fonts&#x2F;tooltip.4004ff.svg</span><br><span class="line">INFO  Generated: img&#x2F;scrollbar_arrow.png</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.8c627f.woff</span><br><span class="line">INFO  Generated: img&#x2F;preloader.gif</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.b322fa.eot</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.16acc2.ttf</span><br><span class="line">INFO  Generated: fonts&#x2F;iconfont.45d7ee.svg</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;index.html</span><br><span class="line">INFO  Generated: archives&#x2F;index.html</span><br><span class="line">INFO  Generated: archives&#x2F;2020&#x2F;08&#x2F;index.html</span><br><span class="line">INFO  Generated: index.html</span><br><span class="line">INFO  Generated: main.0cf68a.css</span><br><span class="line">INFO  Generated: tags&#x2F;php-freetype&#x2F;index.html</span><br><span class="line">INFO  Generated: slider.e37972.js</span><br><span class="line">INFO  Generated: 2020&#x2F;08&#x2F;15&#x2F;Mac-安装新版本php&#x2F;index.html</span><br><span class="line">INFO  Generated: main.0cf68a.js</span><br><span class="line">INFO  Generated: 2020&#x2F;08&#x2F;04&#x2F;我的第一篇博客文章&#x2F;index.html</span><br><span class="line">INFO  Generated: 2020&#x2F;08&#x2F;04&#x2F;hello-world&#x2F;index.html</span><br><span class="line">INFO  Generated: mobile.992cbe.js</span><br><span class="line">INFO  21 files generated in 42 ms</span><br><span class="line">sh-3.2# hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http:&#x2F;&#x2F;localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">^CINFO  See you again</span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">[master 665ba37] Site updated: 2020-08-15 10:15:55</span><br><span class="line"> Committer: System Administrator &lt;root@zhangqilindeMacBook-Pro.local&gt;</span><br><span class="line">Your name and email address were configured automatically based</span><br><span class="line">on your username and hostname. Please check that they are accurate.</span><br><span class="line">You can suppress this message by setting them explicitly. Run the</span><br><span class="line">following command and follow the instructions in your editor to edit</span><br><span class="line">your configuration file:</span><br><span class="line"></span><br><span class="line">    git config --global --edit</span><br><span class="line"></span><br><span class="line">After doing this, you may fix the identity used for this commit with:</span><br><span class="line"></span><br><span class="line">    git commit --amend --reset-author</span><br><span class="line"></span><br><span class="line"> 8 files changed, 1247 insertions(+)</span><br><span class="line"> create mode 100644 2020&#x2F;08&#x2F;15&#x2F;Mac-安装新版本php&#x2F;index.html</span><br><span class="line"> create mode 100644 tags&#x2F;php-freetype&#x2F;index.html</span><br><span class="line">Username for &#39;https:&#x2F;&#x2F;github.com&#39;: zihao-zheng           </span><br><span class="line">Password for &#39;https:&#x2F;&#x2F;zihao-zheng@github.com&#39;: </span><br><span class="line">Counting objects: 22, done.</span><br><span class="line">Delta compression using up to 12 threads.</span><br><span class="line">Compressing objects: 100% (14&#x2F;14), done.</span><br><span class="line">Writing objects: 100% (22&#x2F;22), 3.18 KiB | 1.06 MiB&#x2F;s, done.</span><br><span class="line">Total 22 (delta 9), reused 0 (delta 0)</span><br><span class="line">remote: Resolving deltas: 100% (9&#x2F;9), completed with 5 local objects.</span><br><span class="line">To https:&#x2F;&#x2F;github.com&#x2F;zihao-zheng&#x2F;zihao-zheng.github.io.git</span><br><span class="line">   d407500..665ba37  HEAD -&gt; master</span><br><span class="line">Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;https:&#x2F;&#x2F;github.com&#x2F;zihao-zheng&#x2F;zihao-zheng.github.io.git&#39;.</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line">sh-3.2# </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        
+      
+    </div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Qilin Zhang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2020/08/15/%E5%A6%82%E4%BD%95%E5%B0%86markdown%E6%96%87%E6%A1%A3%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%AB%AF/" title="如何将markdown文档用hexo部署到远端">http://yoursite.com/2020/08/15/%E5%A6%82%E4%BD%95%E5%B0%86markdown%E6%96%87%E6%A1%A3%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%AB%AF/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 技术博客</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/15/Mac-%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACphp/" rel="next" title="mac php安装freetype">
+                <i class="fa fa-chevron-left"></i> mac php安装freetype
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="prev" title="hexo博客搭建">
+                hexo博客搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zihao-zheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86markdown%E6%96%87%E6%A1%A3%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">如何将markdown文档用hexo部署到远端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96root%E6%9D%83%E9%99%90"><span class="nav-number">1.1.</span> <span class="nav-text">1. 获取root权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%AF%E5%8A%A8hexo-%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%89%8D%E6%9C%AC%E5%9C%B0%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">1.2.</span> <span class="nav-text">2.启动hexo,查看目前本地的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E5%8D%9A%E6%96%87"><span class="nav-number">1.3.</span> <span class="nav-text">3.创建博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%BF%9B%E5%85%A5%E5%8D%9A%E6%96%87%E7%9B%AE%E5%BD%95%E8%BF%9B%E8%A1%8C%E7%BC%96%E8%BE%91"><span class="nav-number">1.4.</span> <span class="nav-text">4.进入博文目录进行编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BD%BF%E5%8D%9A%E6%96%87%E5%9C%A8%E6%9C%AC%E5%9C%B0%E7%94%9F%E6%95%88"><span class="nav-number">1.5.</span> <span class="nav-text">5.使博文在本地生效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B0%86%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%AB%AF"><span class="nav-number">1.6.</span> <span class="nav-text">6.将本地文件推到远端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E5%AE%9E%E5%BD%95"><span class="nav-number">1.7.</span> <span class="nav-text">终端实录</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qilin Zhang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.1"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

@@ -128,7 +128,7 @@
 
 
 
-  <title>Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题 | 博客</title>
+  <title>Kubernetes（k8s） | 博客</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/01/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</h1>
+          <h1 class="post-title" itemprop="name headline">Kubernetes（k8s）</h1>
         
 
         <div class="post-meta">
@@ -309,7 +309,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-15T12:55:15+08:00">2020-08-15</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-01T13:27:31+08:00">2021-08-01</time>
             
 
             
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:15:12+08:00">2021-08-01</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-01T14:14:20+08:00">2021-08-01</time>
             
           </span>
 
@@ -355,23 +355,52 @@
       
 
       
-        <h1 id="Mac-OS下-VMware-Fusion-Linux虚拟机改为静态IP-并解决上网问题"><a href="#Mac-OS下-VMware-Fusion-Linux虚拟机改为静态IP-并解决上网问题" class="headerlink" title="Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题"></a>Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</h1><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>Mac OS：Catalina 10.15版本<br>Linux：CentOS6.8</p>
-<h2 id="Linux虚拟机NAT模式下，配置静态IP"><a href="#Linux虚拟机NAT模式下，配置静态IP" class="headerlink" title="Linux虚拟机NAT模式下，配置静态IP"></a>Linux虚拟机NAT模式下，配置静态IP</h2><a id="more"></a>
-<h3 id="1-首先查看LinuxIP配置文件"><a href="#1-首先查看LinuxIP配置文件" class="headerlink" title="1. 首先查看LinuxIP配置文件"></a>1. 首先查看LinuxIP配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@bogon ~]# vim &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <h1 id="Kubernetes（k8s）"><a href="#Kubernetes（k8s）" class="headerlink" title="Kubernetes（k8s）"></a>Kubernetes（k8s）</h1><p>[toc]</p>
+<h2 id="一-认识k8s架构和应用场景"><a href="#一-认识k8s架构和应用场景" class="headerlink" title="一.认识k8s架构和应用场景"></a>一.认识k8s架构和应用场景</h2><h3 id="1-k8s在企业中的场景"><a href="#1-k8s在企业中的场景" class="headerlink" title="1.k8s在企业中的场景"></a>1.k8s在企业中的场景</h3><p>1）自动化运维平台<br>充分利用服务器资源</p>
+<p><img src="https://i.loli.net/2020/12/15/bE9D6On2Z5zgswP.png"></p>
+<a id="more"></a>
 
-<p><img src="https://img-blog.csdnimg.cn/20191127170718727.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70"></p>
-<h3 id="2-编辑ifcfg-ens33-配置文件"><a href="#2-编辑ifcfg-ens33-配置文件" class="headerlink" title="2.编辑ifcfg-ens33 配置文件"></a>2.编辑ifcfg-ens33 配置文件</h3><p>其中 BOOTPROTO设为static，ONBOOT设为yes<br>之后添加IPADDR，GATEWAY，NETWASK，DNS属性<br>(IPADDR是指IP地址；NETMASK是指子网掩码；GATEWAY是指网关)</p>
-<ul>
-<li>打开mac的终端，写下面的命令   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        cat &#x2F;Library&#x2F;Preferences&#x2F;VMware\ Fusion&#x2F;vmnet8&#x2F;nat.conf</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line">就会看到如下ip和netmask，这里到ip对应GATEWAY，netmask对应NETMASK</span><br><span class="line"></span><br><span class="line">![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127172417832.jpg)</span><br><span class="line">- mac -&gt;系统偏好设置-&gt;网络 点击高级后 如下图</span><br><span class="line">  ![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127173123949.jpg?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ&#x3D;&#x3D;,size_16,color_FFFFFF,t_70)</span><br><span class="line"></span><br><span class="line">- 必须配置网关</span><br><span class="line">  </span><br><span class="line">  查看网关的方法</span><br></pre></td></tr></table></figure>
-cat /Library/Preferences/VMware\ Fusion/vmnet8/nat.conf<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 修改方法</span><br><span class="line">  </span><br><span class="line">  终端敲入</span><br></pre></td></tr></table></figure>
-vim /etc/sysconfig/network-scripts/ifcfg-ens33<br>//ens33为网卡<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 3.修改后的ifcfg-eth0 文件</span><br><span class="line">![](https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127173545924.jpg?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ&#x3D;&#x3D;,size_16,color_FFFFFF,t_70)</span><br><span class="line">### 4.保存后重启service network restart</span><br></pre></td></tr></table></figure>
-systemctl restart network.service<br>//或者<br>//service network restart<pre><code>![](https://img-blog.csdnimg.cn/2019112717425120.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70)
-### 5.最后查看是否能上网
-![](https://img-blog.csdnimg.cn/20191127174535690.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTg2NjA3OQ==,size_16,color_FFFFFF,t_70)
-</code></pre>
-</li>
-</ul>
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h2>
+<p>2）服务的无缝迁移<br>3）K8s用容器技术管理项目和服务</p>
+<h3 id="2-服务部署模式的变迁"><a href="#2-服务部署模式的变迁" class="headerlink" title="2.服务部署模式的变迁"></a>2.服务部署模式的变迁</h3><p>1）如何变迁的<br>物理机部署-&gt;虚拟机-&gt;容器化部署<br>2）服务部署模式变化带来的问题<br>需要自动化部署<br>虚拟机服务部署方式（openstack）<br>容器部署方式（k8s）</p>
+<p>面临的问题<br>对服务横向扩展<br>容器宕机怎么办？数据恢复<br>新版本更新不影响原来的业务<br>如何监控容器<br>容器如何调度和创建<br>数据安全性如何保证<br>解决方案：使用k8s</p>
+<h3 id="3-云架构-amp-云原生"><a href="#3-云架构-amp-云原生" class="headerlink" title="3.云架构&amp;云原生"></a>3.云架构&amp;云原生</h3><p>1)云和k8s的关系<br>云:使用容器创建的一套服务器集群网络<br>K8s:管理云中的容器<br>2）云架构<br>    •    iaas     基础设施级服务<br>    •    pass 平台级服务<br>    •    saas软件级服务<br>    •    serverless 向用户提供云服务器，如阿里云等<br>3）云原生<br>让程序和服务运行在云上<br>特点： 容器化，微服务，CI/CD （可持续交互），DevOps</p>
+<p><img src="https://i.loli.net/2020/12/15/sE3GWYXpyAb4aZm.png"></p>
+<h3 id="4-k8s架构原理"><a href="#4-k8s架构原理" class="headerlink" title="4.k8s架构原理"></a>4.k8s架构原理</h3><p>1)kubernetes 是google公司使用go语言开发。源自brog系统<br>2）k8s架构<br>master</p>
+<p><img src="https://i.loli.net/2020/12/15/xwJO8D9dgkA1n6M.png"></p>
+<p>api server: k8s网关<br>scheduler 调度器，把请求资源调度到某个node结点<br>controller 控制器，维护k8s资源对象<br>etcd 存储资源对象</p>
+<p>node</p>
+<p><img src="https://i.loli.net/2020/12/15/T1kfHb7pJBOGR6V.png"></p>
+<p>Docker:容器引擎，基础环境<br>kubelet:每个node结点都有一份，在node结点上的资源操作指令由kubelet来执行，（会从etcd中扫描请求）<br>Kube-proxy:代理服务，做 负载均衡<br>fluentd:  日志收集服务<br>Pod:  k8s管理的最小单元，pod内部是容器，k8s不直接管理容器，而是管理pod</p>
+<p>一个master节点对应多个node节点</p>
+<h2 id="二-深入认识k8s核心组件原理"><a href="#二-深入认识k8s核心组件原理" class="headerlink" title="二.深入认识k8s核心组件原理"></a>二.深入认识k8s核心组件原理</h2><p>k8s核心组件原理（资源对象）—ReplicaSet\replicationController<br>Deployment<br>StatefullSet</p>
+<h3 id="1-pod"><a href="#1-pod" class="headerlink" title="1.pod"></a>1.pod</h3><p><img src="https://i.loli.net/2020/12/15/3ZI7OfhDwjscABy.png"></p>
+<p><img src="https://i.loli.net/2020/12/15/Eb2hKHWtyT1MSsq.png"></p>
+<p><img src="https://i.loli.net/2020/12/15/gkuasYITfXG7Flz.png"></p>
+<p>实现服务集群：只需要复制多方pod的副本即可。k8s如果继续扩容，缩容，只需要控制pod的数量即可。</p>
+<p><img src="https://i.loli.net/2020/12/15/A6xOp5RBNZm1rQl.png"></p>
+<p>因为pause容器，同一个pod中，不同容器间访问更加容易，只需要用localhost方法，而不需用ip,port等远程访问</p>
+<h3 id="2-ReplicaSet副本控制器"><a href="#2-ReplicaSet副本控制器" class="headerlink" title="2.ReplicaSet副本控制器"></a>2.ReplicaSet副本控制器</h3><p>replicationController副本控制器<br>控制pod副本的数量，与预期设定的数量保持一致，当一个pod宕机，副本控制器会立即创建一个新pod,使pod数目恒定</p>
+<p><img src="https://i.loli.net/2020/12/15/KPlcYySN8LzufnD.png"></p>
+<pre><code>    使用RS而不再使用RC</code></pre>
+<h3 id="3-Deployment-部署对象"><a href="#3-Deployment-部署对象" class="headerlink" title="3.Deployment 部署对象"></a>3.Deployment 部署对象</h3><p>服务部署结构模型</p>
+<p><img src="https://i.loli.net/2020/12/15/UNYW54qbtMwFmR8.pnghttps://i.loli.net/2020/12/15/1IDknwyuYlrN2Q9.png"></p>
+<p>滚动更新</p>
+<h3 id="4-StatefulSet———解决有状态服务使用容器化部署的问题"><a href="#4-StatefulSet———解决有状态服务使用容器化部署的问题" class="headerlink" title="4.StatefulSet———解决有状态服务使用容器化部署的问题"></a>4.StatefulSet———解决有状态服务使用容器化部署的问题</h3><p>（像mysql这样的有状态服务不宜用deployment进行部署,deployment通常被用来部署无状态服务）因此，k8s使用StatefulSet进行有状态服务</p>
+<p>部署模型</p>
+<p><img src="https://i.loli.net/2020/12/15/2lirUk9qTHbjWN3.png"></p>
+<p>有状态服务</p>
+<h2 id="三-k8s服务的注册与发现，负载均衡"><a href="#三-k8s服务的注册与发现，负载均衡" class="headerlink" title="三.k8s服务的注册与发现，负载均衡"></a>三.k8s服务的注册与发现，负载均衡</h2><p>Service:如何在pod中实现负载均衡<br>Service VIP    (visual IP    虚拟IP地址)</p>
+<h3 id="1-pod如何对外网提供服务，内部是如何访问pod的"><a href="#1-pod如何对外网提供服务，内部是如何访问pod的" class="headerlink" title="1.pod如何对外网提供服务，内部是如何访问pod的"></a>1.pod如何对外网提供服务，内部是如何访问pod的</h3><p><img src="https://i.loli.net/2020/12/15/D1Umt9gkbcfRd5X.png"></p>
+<p>一个pod中不同容器之间通过localhost即可访问</p>
+<h3 id="2-pod如何实现负载均衡"><a href="#2-pod如何实现负载均衡" class="headerlink" title="2.pod如何实现负载均衡"></a>2.pod如何实现负载均衡</h3><p>pod是一个进程，是有生命周期的（宕机，版本更新），都会创建新的pod,（ip地址变化，hostname变化）,因此，nginx做负载不太合适</p>
+<p><img src="https://i.loli.net/2020/12/15/1DTpadvS5wVGNQy.png"></p>
+<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
+<p>service VIP更深入原理探讨</p>
+<p><img src="https://i.loli.net/2020/12/15/TjFucgIpmyrsvwU.png"></p>
+<p><img src="https://i.loli.net/2020/12/15/aJOhgxXj1sLdKpS.png"></p>
+<p>Service 如何与pod关联？    用 标签选择器<br>如果pod宕机，service如何发现pod已经变化</p>
+<p><img src="https://i.loli.net/2020/12/15/2pRdTFKHgaE9Lo8.png"></p>
+
       
     </div>
     
@@ -397,7 +426,7 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题">http://yoursite.com/2020/08/15/CentOS7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</a>
+    <a href="http://yoursite.com/2021/08/01/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes（k8s）">http://yoursite.com/2021/08/01/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -425,14 +454,18 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2021/08/01/Note1/" rel="next" title="Neural Networks and Deep Learning">
+                <i class="fa fa-chevron-left"></i> Neural Networks and Deep Learning
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/08/15/Mac-%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACphp/" rel="prev" title="mac php安装freetype">
-                mac php安装freetype <i class="fa fa-chevron-right"></i>
+              <a href="/2021/08/01/7.1/" rel="prev" title="深蓝学院语音合成 2.1.前端文本分析">
+                深蓝学院语音合成 2.1.前端文本分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,7 +607,7 @@ systemctl restart network.service<br>//或者<br>//service network restart<pre><
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-OS%E4%B8%8B-VMware-Fusion-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%94%B9%E4%B8%BA%E9%9D%99%E6%80%81IP-%E5%B9%B6%E8%A7%A3%E5%86%B3%E4%B8%8A%E7%BD%91%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">Mac OS下 VMware Fusion Linux虚拟机改为静态IP 并解决上网问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E8%99%9A%E6%8B%9F%E6%9C%BANAT%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%8C%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="nav-number">1.2.</span> <span class="nav-text">Linux虚拟机NAT模式下，配置静态IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A6%96%E5%85%88%E6%9F%A5%E7%9C%8BLinuxIP%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 首先查看LinuxIP配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BC%96%E8%BE%91ifcfg-ens33-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.编辑ifcfg-ens33 配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number">1.3.</span> <span class="nav-text">大功告成</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubernetes%EF%BC%88k8s%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Kubernetes（k8s）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E8%AE%A4%E8%AF%86k8s%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">一.认识k8s架构和应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-k8s%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%B8%AD%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.k8s在企业中的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%98%E8%BF%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.服务部署模式的变迁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BA%91%E6%9E%B6%E6%9E%84-amp-%E4%BA%91%E5%8E%9F%E7%94%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.云架构&amp;云原生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-k8s%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.k8s架构原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E6%B7%B1%E5%85%A5%E8%AE%A4%E8%AF%86k8s%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">二.深入认识k8s核心组件原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pod"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ReplicaSet%E5%89%AF%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.ReplicaSet副本控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Deployment-%E9%83%A8%E7%BD%B2%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.Deployment 部署对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-StatefulSet%E2%80%94%E2%80%94%E2%80%94%E8%A7%A3%E5%86%B3%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E4%BD%BF%E7%94%A8%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.StatefulSet———解决有状态服务使用容器化部署的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-k8s%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0%EF%BC%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三.k8s服务的注册与发现，负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pod%E5%A6%82%E4%BD%95%E5%AF%B9%E5%A4%96%E7%BD%91%E6%8F%90%E4%BE%9B%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%86%85%E9%83%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AEpod%E7%9A%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.pod如何对外网提供服务，内部是如何访问pod的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-pod%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.pod如何实现负载均衡</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
