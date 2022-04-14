@@ -174,17 +174,6 @@ shell编程</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>深蓝学院语音合成 2.1.前端文本分析</title>
-    <url>/2021/08/01/7.1/</url>
-    <content><![CDATA[<h1 id="7-1-语音合成的高阶应用"><a href="#7-1-语音合成的高阶应用" class="headerlink" title="7.1.语音合成的高阶应用"></a>7.1.语音合成的高阶应用</h1><h2 id="带韵律控制的Tacotron"><a href="#带韵律控制的Tacotron" class="headerlink" title="带韵律控制的Tacotron"></a>带韵律控制的Tacotron</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%887.04.48.png"></p>
-<a id="more"></a>
-
-]]></content>
-      <tags>
-        <tag>语音合成</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>深蓝语音课程：5.1.端到端语音合成进阶</title>
     <url>/2021/08/01/5.1/</url>
     <content><![CDATA[<h1 id="深蓝语音课程：5-1-端到端语音合成进阶"><a href="#深蓝语音课程：5-1-端到端语音合成进阶" class="headerlink" title="深蓝语音课程：5.1.端到端语音合成进阶"></a>深蓝语音课程：5.1.端到端语音合成进阶</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%884.36.25.png"></p>
@@ -195,6 +184,17 @@ shell编程</code></pre>
 <h3 id="自注意力机制"><a href="#自注意力机制" class="headerlink" title="自注意力机制"></a>自注意力机制</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%884.49.20.png"></p>
 <p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%885.11.17.png"></p>
 <h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%885.13.53.png"></p>
+]]></content>
+      <tags>
+        <tag>语音合成</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深蓝学院语音合成 2.1.前端文本分析</title>
+    <url>/2021/08/01/7.1/</url>
+    <content><![CDATA[<h1 id="7-1-语音合成的高阶应用"><a href="#7-1-语音合成的高阶应用" class="headerlink" title="7.1.语音合成的高阶应用"></a>7.1.语音合成的高阶应用</h1><h2 id="带韵律控制的Tacotron"><a href="#带韵律控制的Tacotron" class="headerlink" title="带韵律控制的Tacotron"></a>带韵律控制的Tacotron</h2><p><img src="https://raw.githubusercontent.com/zihao-zheng/picgo/master/%E6%88%AA%E5%B1%8F2021-03-20%20%E4%B8%8B%E5%8D%887.04.48.png"></p>
+<a id="more"></a>
+
 ]]></content>
       <tags>
         <tag>语音合成</tag>
